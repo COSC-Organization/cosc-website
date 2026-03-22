@@ -1,7 +1,10 @@
 # 🌐 COSC Website
-The official website of the **Canara Open Source Community (COSC)** — a community built to make open source accessible, welcoming, and impactful for everyone.
+The official website of the **Canara Open Source Community (COSC)** —a student led community focused on empowering developers by fostering collaboration and real world learning through open source.
 
-> 🌍 English | [Contributing Guide](./CONTRIBUTING.md) | [Code of Conduct](./CODE_OF_CONDUCT.md)
+# Our Vision
+* Learn     * Build     * Share     * Contribute
+
+> 🌍 English | [Contributing Guide](./CONTRIBUTION.md) | [Code of Conduct](./CODE_OF_CONDUCT.md)
 
 ---
 
@@ -51,7 +54,7 @@ Visit [http://localhost:3000](http://localhost:3000) to see the site live.
 
 ## 🤝 Contributing
 
-We welcome contributions of all kinds! Please read our [Contributing Guide](./CONTRIBUTING.md) to get started.
+We welcome contributions of all kinds! Please read our [Contributing Guide](./CONTRIBUTION.md) to get started.
 
 ## 📜 Code of Conduct
 
