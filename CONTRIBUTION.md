@@ -95,8 +95,7 @@ If your commit is blocked, it means Prettier or ESLint found an issue. Fix the r
 
 You can also run them manually:
 ```bash
-# Format code
-npm run format
+
 
 # Lint code
 npm run lint
