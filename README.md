@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌐 COSC Website
+The official website of the **Canara Open Source Community (COSC)** — a community built to make open source accessible, welcoming, and impactful for everyone.
 
-## Getting Started
+> 🌍 English | [Contributing Guide](./CONTRIBUTING.md) | [Code of Conduct](./CODE_OF_CONDUCT.md)
 
-First, run the development server:
+---
 
+## Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| [Next.js](https://nextjs.org/) | React framework for the web |
+| [Tailwind CSS](https://tailwindcss.com/) | Utility-first CSS styling |
+| [TypeScript](https://www.typescriptlang.org/) | Type-safe JavaScript |
+
+---
+
+## Running the Project Locally
+
+### Must haves
+- [Node.js](https://nodejs.org/)
+- [Git](https://git-scm.com/)
+
+### Steps
+
+**1. Clone the repository**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/COSC-Organization/cosc-website.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**2. Navigate into the project folder**
+```bash
+cd cosc-website
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**3. Install dependencies**
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**4. Start the development server**
+```bash
+npm run dev
+```
 
-## Learn More
+**5. Open in your browser**
 
-To learn more about Next.js, take a look at the following resources:
+Visit [http://localhost:3000](http://localhost:3000) to see the site live.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🤝 Contributing
 
-## Deploy on Vercel
+We welcome contributions of all kinds! Please read our [Contributing Guide](./CONTRIBUTING.md) to get started.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📜 Code of Conduct
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+We are committed to fostering a welcoming community. Please read our [Code of Conduct](./CODE_OF_CONDUCT.md) before participating.
+
+## 📄 License
+
+This project is open source and available under the [MIT License](./LICENSE).
