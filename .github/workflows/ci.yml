@@ -11,25 +11,26 @@ jobs:
     name: Lint & Build
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-
     steps:
+      #  Checkout code
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      #  Setup Node 20.x (required for Next.js 16)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          node-version: 20
+          cache: npm
 
+      #  Install dependencies
       - name: Install dependencies
         run: npm ci
 
+      #  Run Lint
       - name: Run Lint
         run: npm run lint
 
+      #  Build Next.js
       - name: Build Project
         run: npm run build
