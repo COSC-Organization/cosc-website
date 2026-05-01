@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import HeroLogo from '@/components/HeroLogo';
-import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import Features from '@/components/Features';
 import Footer from '@/components/Footer';
@@ -11,7 +10,7 @@ export default function Home() {
   const [isAppLoaded, setIsAppLoaded] = useState(false);
 
   return (
-    <div className="flex flex-col flex-1 min-h-screen bg-white font-sans relative">
+    <div className="flex flex-col flex-1 min-h-screen bg-black font-sans relative">
       
       {/* LOADING OVERLAY - Shown initially, removed after massive transition */}
       {!isAppLoaded && (
@@ -26,7 +25,6 @@ export default function Home() {
       {/* ACTUAL LANDING PAGE CONTENT - Unveiled once the orb explodes and transition finishes */}
       {isAppLoaded && (
         <main className="flex flex-1 w-full flex-col animate-in fade-in duration-1000">
-          <Navbar />
           <HeroSection />
           <Features />
           <Footer />

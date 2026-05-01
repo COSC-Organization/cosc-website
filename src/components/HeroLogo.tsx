@@ -20,12 +20,7 @@ export default function HeroLogo({ onTransitionComplete }: HeroLogoProps) {
       svg.createDrawable(el)
     );
 
-    // Split hero text into individual characters for liquid animation
-    const heroTextEl = document.querySelector('.hero-text');
-    let splitChars: ReturnType<typeof splitText> | null = null;
-    if (heroTextEl) {
-      splitChars = splitText(heroTextEl as HTMLElement);
-    }
+    // ── Phase 1: Boot Sequence ────────────────────────────────
 
     const tl = createTimeline({
       defaults: {
@@ -78,33 +73,7 @@ export default function HeroLogo({ onTransitionComplete }: HeroLogoProps) {
         '-=800'
       );
 
-    // Stagger-in hero text characters after logo lands
-    if (splitChars) {
-      tl.add(
-        '.hero-text .char',
-        {
-          opacity: [0, 1],
-          translateY: [20, 0],
-          ease: 'outExpo',
-          duration: 600,
-          delay: stagger(60),
-        },
-        '-=400'
-      );
-    }
-
-    // Subtitle fade in
     tl.add(
-      '.hero-subtitle',
-      {
-        opacity: [0, 0.8],
-        translateY: [10, 0],
-        ease: 'outExpo',
-        duration: 800,
-      },
-      '-=400'
-    )
-    .add(
       '.cosc-frame, .circuit-line',
       {
         fillOpacity: [0, 1],
@@ -113,6 +82,7 @@ export default function HeroLogo({ onTransitionComplete }: HeroLogoProps) {
       },
       '-=600'
     );
+
 
     // ── Phase 2: Idle — "Living Logo" ─────────────────────────
 
@@ -220,26 +190,7 @@ export default function HeroLogo({ onTransitionComplete }: HeroLogoProps) {
     });
   }, []);
 
-  // Text "expand-to-breathe" on hover
-  const dtTextEnter = useCallback(() => {
-    if (!ready.current) return;
-    animate('.hero-text .char', {
-      letterSpacing: ['0px', '6px'],
-      duration: 600,
-      ease: 'outElastic(1, .6)',
-      delay: stagger(30),
-    });
-  }, []);
-
-  const dtTextLeave = useCallback(() => {
-    if (!ready.current) return;
-    animate('.hero-text .char', {
-      letterSpacing: ['6px', '0px'],
-      duration: 600,
-      ease: 'outExpo',
-      delay: stagger(30),
-    });
-  }, []);
+  // ── Phase 3: Interactive Micro-Animations ─────────────────
 
   return (
     <div className="flex flex-col w-full h-full items-center justify-center gap-10">
