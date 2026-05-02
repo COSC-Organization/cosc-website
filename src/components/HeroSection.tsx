@@ -61,6 +61,17 @@ export default function HeroSection() {
           />
         </div>
 
+        {/* GIF 7 Background (next left to 4.gif) */}
+        <div className="absolute top-[30.5%] left-[66%] -translate-x-1/2 -translate-y-1/2 w-[20%] h-[23%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+          <Image
+            src="/7.gif"
+            alt="Background Animation Left"
+            fill
+            unoptimized
+            className="object-contain"
+          />
+        </div>
+
         {/* GIF 4 Background (below nav, right side) */}
         <div className="absolute top-[35%] left-[78%] -translate-x-1/2 -translate-y-1/2 w-[20%] h-[20%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <Image
