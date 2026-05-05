@@ -21,6 +21,9 @@ const cormorant = Cormorant({
 export const metadata: Metadata = {
   title: 'COSC',
   description: 'COSC',
+  icons: {
+    icon: '/cosc.jpeg',
+  },
 };
 
 export default function RootLayout({

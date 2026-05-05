@@ -36,6 +36,20 @@ export default function HeroSection() {
       </div>
 
       <div className="relative w-full h-full z-10">
+        {/* Video 8 Background (left of 2.mp4) */}
+        <div className="absolute top-[30.2%] left-[35%] -translate-x-1/2 -translate-y-1/2 w-[16%] h-[25%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+          <video
+            src="/8.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            disablePictureInPicture
+            controlsList="nopictureinpicture"
+            className="w-full h-full object-contain pointer-events-none"
+          />
+        </div>
+
         {/* Video Background */}
         <div className="absolute top-[30.2%] left-[42%] -translate-x-1/2 -translate-y-1/2 w-[20%] h-[24%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <video
@@ -61,14 +75,17 @@ export default function HeroSection() {
           />
         </div>
 
-        {/* GIF 7 Background (next left to 4.gif) */}
-        <div className="absolute top-[30.5%] left-[66%] -translate-x-1/2 -translate-y-1/2 w-[20%] h-[23%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
-          <Image
-            src="/7.gif"
-            alt="Background Animation Left"
-            fill
-            unoptimized
-            className="object-contain"
+        {/* Video 7 Background (next left to 4.gif) */}
+        <div className="absolute top-[30.5%] left-[66%] -translate-x-1/2 -translate-y-1/2 w-[26%] h-[30%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+          <video
+            src="/7.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            disablePictureInPicture
+            controlsList="nopictureinpicture"
+            className="w-full h-full object-contain pointer-events-none"
           />
         </div>
 
