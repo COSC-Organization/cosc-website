@@ -1,6 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 @import 'tailwindcss';
 
+@font-face {
+  font-family: 'Canela';
+  src: url('/fonts/Canela-Bold-Web.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Canela';
+  src: url('/fonts/Canela-Light-Web.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -12,6 +26,7 @@
   --font-sans: 'Inter', var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-cormorant: var(--font-cormorant);
+  --font-canela: 'Canela', serif;
 }
 
 

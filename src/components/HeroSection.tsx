@@ -16,7 +16,7 @@ export default function HeroSection() {
     <section className="relative w-full h-screen bg-black overflow-hidden pt-48">
       {/* Top Left Brand */}
       <div className="absolute top-12 left-12 z-20">
-        <h1 className="text-white text-4xl font-bold tracking-tighter uppercase font-cormorant leading-none">
+        <h1 className="text-white text-5xl font-bold tracking-tighter uppercase font-canela leading-none">
           Canara Open Source Community
         </h1>
       </div>
@@ -93,6 +93,20 @@ export default function HeroSection() {
           />
         </div>
 
+        {/* Video 6 Background (below 4.gif, left side) */}
+        <div className="absolute top-[60%] left-[22%] -translate-x-1/2 -translate-y-1/2 w-[25%] h-[25%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+          <video
+            src="/6.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            disablePictureInPicture
+            controlsList="nopictureinpicture"
+            className="w-full h-full object-contain pointer-events-none"
+          />
+        </div>
+
         {/* GIF 5 Background (below 2.mp4) */}
         <div className="absolute top-[53%] left-[34.95%] -translate-x-1/2 -translate-y-1/2 w-[15%] h-[20%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <Image
@@ -104,7 +118,16 @@ export default function HeroSection() {
           />
         </div>
 
-
+        {/* GIF 4 Background (below nav, left side) */}
+        <div className="absolute top-[35%] left-[22%] -translate-x-1/2 -translate-y-1/2 w-[15%] h-[20%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+          <Image
+            src="/4.gif"
+            alt="Background Animation Left"
+            fill
+            unoptimized
+            className="object-contain"
+          />
+        </div>
 
         {/* GIF 4 Background (below nav, right side) */}
         <div className="absolute top-[35%] left-[78%] -translate-x-1/2 -translate-y-1/2 w-[15%] h-[20%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
