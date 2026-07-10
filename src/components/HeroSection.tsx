@@ -17,8 +17,11 @@ export default function HeroSection() {
       {/* Top Left Brand */}
       <div className="absolute top-12 left-12 z-20">
         <h1 className="text-white text-5xl font-bold tracking-tighter uppercase font-canela leading-none">
-          Canara Open Source Community
+          Canara Open Source<br></br> Community
         </h1>
+        <p className="text-white/80 font-geometric text-[10px] sm:text-xs tracking-[0.2em] uppercase mt-4">
+          Learn &bull; Build &bull; Share &bull; Contribute
+        </p>
       </div>
 
       {/* Top Right Navigation */}
@@ -38,7 +41,7 @@ export default function HeroSection() {
       <div className="relative w-full h-full z-10">
 
         {/* Video 1 Background (between 5.gif and 7.mp4) */}
-        <div className="absolute top-[53%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[18%] h-[22%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[52%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[18%] h-[22%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <video
             src="/1.mp4"
             autoPlay
