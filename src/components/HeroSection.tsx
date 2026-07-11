@@ -15,23 +15,37 @@ export default function HeroSection() {
   return (
     <section className="relative w-full h-screen bg-black overflow-hidden pt-48">
       {/* Top Left Brand */}
-      <div className="absolute top-12 left-12 z-20">
-        <h1 className="text-white text-5xl font-bold tracking-tighter uppercase font-canela leading-none">
-          Canara Open Source<br></br> Community
-        </h1>
-        <p className="text-white/80 font-geometric text-[10px] sm:text-xs tracking-[0.2em] uppercase mt-4">
-          Learn &bull; Build &bull; Share &bull; Contribute
-        </p>
+      <div className="absolute top-3 left-3 z-20 flex items-center gap-1">
+        <div className="relative w-48 h-48 flex-shrink-0 -translate-y-4">
+          <Image
+            src="/cosc logo.png"
+            alt="Canara Open Source Community Logo"
+            fill
+            sizes="192px"
+            className="object-contain scale-125"
+            priority
+          />
+        </div>
+        <div className="-ml-6">
+          <h1 className="text-white text-5xl font-bold tracking-tighter uppercase font-canela leading-none -translate-y-[18%]">
+            Canara Open Source<br></br> Community
+          </h1>
+        </div>
       </div>
+
+      <p className="absolute top-[145px] left-[190px] z-20 text-white/80 font-geometric text-[10px] sm:text-xs tracking-[0.2em] uppercase whitespace-nowrap">
+        Learn &bull; Build &bull; Share &bull; Contribute
+      </p>
+
 
       {/* Top Right Navigation */}
       <div className="absolute top-12 right-12 z-20 hidden md:grid grid-cols-2 gap-x-16 gap-y-3">
         {navItems.map((item) => (
           <div key={item.id} className="flex items-baseline gap-4 group cursor-pointer">
-            <span className="text-zinc-600 font-mono text-sm tracking-tighter">
+            <span className="text-zinc-600 font-mono text-sm tracking-tighter group-hover:text-white transition-colors">
               {item.id}
             </span>
-            <span className="text-zinc-100 text-lg font-medium tracking-tight group-hover:text-white transition-colors">
+            <span className="text-zinc-300 text-[10px] sm:text-xs font-geometric font-medium tracking-[0.2em] uppercase group-hover:text-white transition-colors">
               {item.label}
             </span>
           </div>
