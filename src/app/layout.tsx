@@ -37,6 +37,16 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="preload" href="/1.mp4" as="video" type="video/mp4" />
+        <link rel="preload" href="/2.mp4" as="video" type="video/mp4" />
+        <link rel="preload" href="/3.mp4" as="video" type="video/mp4" />
+        <link rel="preload" href="/6.mp4" as="video" type="video/mp4" />
+        <link rel="preload" href="/7.mp4" as="video" type="video/mp4" />
+        <link rel="preload" href="/8.mp4" as="video" type="video/mp4" />
+        <link rel="preload" href="/4.gif" as="image" type="image/gif" />
+        <link rel="preload" href="/5.gif" as="image" type="image/gif" />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

@@ -62,6 +62,7 @@ export default function HeroSection() {
             loop
             muted
             playsInline
+            preload="auto"
             disablePictureInPicture
             controlsList="nopictureinpicture"
             className="w-full h-full object-contain pointer-events-none"
@@ -76,6 +77,7 @@ export default function HeroSection() {
             loop
             muted
             playsInline
+            preload="auto"
             disablePictureInPicture
             controlsList="nopictureinpicture"
             className="w-full h-full object-contain pointer-events-none"
@@ -90,6 +92,7 @@ export default function HeroSection() {
             loop
             muted
             playsInline
+            preload="auto"
             disablePictureInPicture
             controlsList="nopictureinpicture"
             className="w-full h-full object-contain pointer-events-none"
@@ -104,6 +107,7 @@ export default function HeroSection() {
             loop
             muted
             playsInline
+            preload="auto"
             disablePictureInPicture
             controlsList="nopictureinpicture"
             className="w-full h-full object-contain pointer-events-none"
@@ -118,6 +122,7 @@ export default function HeroSection() {
             loop
             muted
             playsInline
+            preload="auto"
             disablePictureInPicture
             controlsList="nopictureinpicture"
             className="w-full h-full object-contain pointer-events-none"
@@ -165,6 +170,7 @@ export default function HeroSection() {
             loop
             muted
             playsInline
+            preload="auto"
             disablePictureInPicture
             controlsList="nopictureinpicture"
             className="w-full h-full object-contain pointer-events-none"
@@ -179,6 +185,7 @@ export default function HeroSection() {
             loop
             muted
             playsInline
+            preload="auto"
             disablePictureInPicture
             controlsList="nopictureinpicture"
             className="w-full h-full object-contain pointer-events-none"
