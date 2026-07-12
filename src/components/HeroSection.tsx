@@ -147,34 +147,46 @@ export default function HeroSection() {
 
         {/* GIF 5 Background (below 2.mp4) */}
         <div className="absolute top-[62.5%] left-[35.5%] -translate-x-1/2 -translate-y-1/2 w-[11%] h-[13%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
-          <Image
-            src="/5.gif"
-            alt="Background Animation Middle"
-            fill
-            unoptimized
-            className="object-contain"
+          <video
+            src="/5.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            disablePictureInPicture
+            controlsList="nopictureinpicture"
+            className="w-full h-full object-contain pointer-events-none"
           />
         </div>
 
         {/* GIF 4 Background (below nav, left side) */}
         <div className="absolute top-[46%] left-[22%] -translate-x-1/2 -translate-y-1/2 w-[15%] h-[15%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
-          <Image
-            src="/4.gif"
-            alt="Background Animation Left"
-            fill
-            unoptimized
-            className="object-contain"
+          <video
+            src="/4.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            disablePictureInPicture
+            controlsList="nopictureinpicture"
+            className="w-full h-full object-contain pointer-events-none"
           />
         </div>
 
         {/* GIF 4 Background (below nav, right side) */}
         <div className="absolute top-[45%] left-[79.5%] -translate-x-1/2 -translate-y-1/2 w-[12%] h-[13%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
-          <Image
-            src="/4.gif"
-            alt="Background Animation Right"
-            fill
-            unoptimized
-            className="object-contain"
+          <video
+            src="/4.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            disablePictureInPicture
+            controlsList="nopictureinpicture"
+            className="w-full h-full object-contain pointer-events-none"
           />
         </div>
 
