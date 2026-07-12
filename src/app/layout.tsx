@@ -45,8 +45,8 @@ export default function RootLayout({
         <link rel="preload" href="/7.mp4" as="video" type="video/mp4" />
         <link rel="preload" href="/8.mp4" as="video" type="video/mp4" />
         <link rel="preload" href="/9.mp4" as="video" type="video/mp4" />
-        <link rel="preload" href="/4.gif" as="image" type="image/gif" />
-        <link rel="preload" href="/5.gif" as="image" type="image/gif" />
+        <link rel="preload" href="/4.mp4" as="video" type="video/mp4" />
+        <link rel="preload" href="/5.mp4" as="video" type="video/mp4" />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

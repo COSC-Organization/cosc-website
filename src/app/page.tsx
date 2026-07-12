@@ -18,6 +18,65 @@ export default function Home() {
     }
   }, [isAnimationComplete]);
 
+  // Prevent user from inspecting the page
+  useEffect(() => {
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Disable F12
+      if (e.key === 'F12') {
+        e.preventDefault();
+        return;
+      }
+
+      // Disable Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+      if (
+        e.ctrlKey &&
+        e.shiftKey &&
+        (e.key === 'I' ||
+          e.key === 'i' ||
+          e.key === 'J' ||
+          e.key === 'j' ||
+          e.key === 'C' ||
+          e.key === 'c')
+      ) {
+        e.preventDefault();
+        return;
+      }
+
+      // Disable Ctrl+U (View Source)
+      if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+        e.preventDefault();
+        return;
+      }
+
+      // Disable Cmd+Opt+I, Cmd+Opt+J, Cmd+Opt+C on Mac
+      if (
+        e.metaKey &&
+        e.altKey &&
+        (e.key === 'I' ||
+          e.key === 'i' ||
+          e.key === 'J' ||
+          e.key === 'j' ||
+          e.key === 'C' ||
+          e.key === 'c')
+      ) {
+        e.preventDefault();
+        return;
+      }
+    };
+
+    document.addEventListener('contextmenu', handleContextMenu);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
     <div className="relative flex min-h-screen flex-col bg-black font-sans">
       {/* Loading Overlay */}

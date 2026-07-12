@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef, useCallback } from 'react';
-import { animate, createTimeline, stagger, svg, splitText } from 'animejs';
+import { animate, createTimeline, stagger, svg, JSAnimation, Timeline } from 'animejs';
 
 interface HeroLogoProps {
   onTransitionComplete?: () => void;
@@ -111,7 +111,7 @@ export default function HeroLogo({ onTransitionComplete }: HeroLogoProps) {
 
     // Data stream: random highlight running along circuit lines
     let hlTimeout: ReturnType<typeof setTimeout>;
-    let currentHighlightAnims: any[] = [];
+    let currentHighlightAnims: (JSAnimation | Timeline)[] = [];
     const highlightLoop = () => {
       if (drawables.length > 0) {
         const idx = Math.floor(Math.random() * drawables.length);
@@ -134,7 +134,7 @@ export default function HeroLogo({ onTransitionComplete }: HeroLogoProps) {
     hlTimeout = setTimeout(highlightLoop, 2500);
 
     // ── Phase 3: Transition Out ─────────────────
-    let transitionAnims: any[] = [];
+    let transitionAnims: (JSAnimation | Timeline)[] = [];
     const transitionTimeout = setTimeout(() => {
       // Scale up the core orb massively to cover the whole screen
       const orbAnim = animate('#core-orb', {
