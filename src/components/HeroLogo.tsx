@@ -107,13 +107,7 @@ export default function HeroLogo({ onTransitionComplete }: HeroLogoProps) {
       ease: 'inOutSine',
     });
 
-    // Orbital ring rotation
-    animate('.orbital-ring', {
-      rotate: 360,
-      duration: 20000,
-      loop: true,
-      ease: 'linear',
-    });
+    
 
     // Data stream: random highlight running along circuit lines
     let hlTimeout: ReturnType<typeof setTimeout>;
@@ -150,7 +144,7 @@ export default function HeroLogo({ onTransitionComplete }: HeroLogoProps) {
       });
 
       // Fade out all other specific elements so they disappear during explosion
-      animate('.cosc-frame, .circuit-line, .terminal-node, .orbital-ring', {
+      animate('.cosc-frame, .circuit-line, .terminal-node', {
         opacity: [1, 0],
         fillOpacity: [1, 0],
         duration: 800,
@@ -202,22 +196,7 @@ export default function HeroLogo({ onTransitionComplete }: HeroLogoProps) {
         className="relative w-72 h-72 sm:w-96 sm:h-96 cursor-crosshair"
         style={{ perspective: '800px', transformStyle: 'preserve-3d' }}
       >
-        {/* Orbital ring (rotating dotted ring behind logo) */}
-        <svg
-          className="orbital-ring absolute inset-[-16px] w-[calc(100%+32px)] h-[calc(100%+32px)] pointer-events-none opacity-20"
-          viewBox="0 0 240 240"
-        >
-          <circle
-            cx="120"
-            cy="120"
-            r="110"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="0.5"
-            strokeDasharray="4 6"
-            className="text-zinc-400 "
-          />
-        </svg>
+        
 
         {/* Main Logo SVG */}
         <svg
