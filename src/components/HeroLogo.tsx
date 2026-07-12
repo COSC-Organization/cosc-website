@@ -87,7 +87,7 @@ export default function HeroLogo({ onTransitionComplete }: HeroLogoProps) {
     // ── Phase 2: Idle — "Living Logo" ─────────────────────────
 
     // Core orb breathing pulse
-    animate('#core-orb', {
+    const pulseAnim = animate('#core-orb', {
       scale: [0.98, 1.02],
       duration: 3000,
       alternate: true,
@@ -96,7 +96,7 @@ export default function HeroLogo({ onTransitionComplete }: HeroLogoProps) {
     });
 
     // Glow breathing via CSS variable
-    animate('#core-orb', {
+    const glowAnim = animate('#core-orb', {
       filter: [
         'drop-shadow(0 0 6px rgba(205,127,50,0.4))',
         'drop-shadow(0 0 14px rgba(205,127,50,0.85))',
@@ -107,40 +107,37 @@ export default function HeroLogo({ onTransitionComplete }: HeroLogoProps) {
       ease: 'inOutSine',
     });
 
-    // Orbital ring rotation
-    animate('.orbital-ring', {
-      rotate: 360,
-      duration: 20000,
-      loop: true,
-      ease: 'linear',
-    });
+    
 
     // Data stream: random highlight running along circuit lines
     let hlTimeout: ReturnType<typeof setTimeout>;
+    let currentHighlightAnims: any[] = [];
     const highlightLoop = () => {
       if (drawables.length > 0) {
         const idx = Math.floor(Math.random() * drawables.length);
-        animate(drawables[idx], {
+        const anim1 = animate(drawables[idx], {
           draw: ['0 0.1', '0.9 1'],
           duration: 1200,
           ease: 'inOutSine',
           alternate: true,
         });
-        animate(circuitEls[idx], {
+        const anim2 = animate(circuitEls[idx], {
           opacity: [0.3, 1],
           duration: 1200,
           ease: 'inOutSine',
           alternate: true,
         });
+        currentHighlightAnims = [anim1, anim2];
       }
       hlTimeout = setTimeout(highlightLoop, Math.random() * 2500 + 800);
     };
     hlTimeout = setTimeout(highlightLoop, 2500);
 
     // ── Phase 3: Transition Out ─────────────────
+    let transitionAnims: any[] = [];
     const transitionTimeout = setTimeout(() => {
       // Scale up the core orb massively to cover the whole screen
-      animate('#core-orb', {
+      const orbAnim = animate('#core-orb', {
         scale: 150,
         duration: 1200,
         ease: 'inOutExpo',
@@ -150,17 +147,24 @@ export default function HeroLogo({ onTransitionComplete }: HeroLogoProps) {
       });
 
       // Fade out all other specific elements so they disappear during explosion
-      animate('.cosc-frame, .circuit-line, .terminal-node, .orbital-ring', {
+      const fadeAnim = animate('.cosc-frame, .circuit-line, .terminal-node', {
         opacity: [1, 0],
         fillOpacity: [1, 0],
         duration: 800,
         ease: 'inOutSine'
       });
+
+      transitionAnims = [orbAnim, fadeAnim];
     }, 4000);
 
     return () => {
       clearTimeout(hlTimeout);
       clearTimeout(transitionTimeout);
+      tl.cancel();
+      pulseAnim.cancel();
+      glowAnim.cancel();
+      currentHighlightAnims.forEach((anim) => anim.cancel());
+      transitionAnims.forEach((anim) => anim.cancel());
       ready.current = false;
     };
   }, [onTransitionComplete]);
@@ -202,22 +206,7 @@ export default function HeroLogo({ onTransitionComplete }: HeroLogoProps) {
         className="relative w-72 h-72 sm:w-96 sm:h-96 cursor-crosshair"
         style={{ perspective: '800px', transformStyle: 'preserve-3d' }}
       >
-        {/* Orbital ring (rotating dotted ring behind logo) */}
-        <svg
-          className="orbital-ring absolute inset-[-16px] w-[calc(100%+32px)] h-[calc(100%+32px)] pointer-events-none opacity-20"
-          viewBox="0 0 240 240"
-        >
-          <circle
-            cx="120"
-            cy="120"
-            r="110"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="0.5"
-            strokeDasharray="4 6"
-            className="text-zinc-400 "
-          />
-        </svg>
+        
 
         {/* Main Logo SVG */}
         <svg
