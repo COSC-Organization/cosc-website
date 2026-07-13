@@ -68,10 +68,69 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
     };
   }, [isAnimationComplete]);
 
+  // Convert vertical scroll gestures to horizontal scroll in responsive view (< 768px)
+  React.useEffect(() => {
+    const container = sectionRef.current;
+    if (!container) return;
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let scrollStartX = 0;
+
+    const handleWheel = (e: WheelEvent) => {
+      if (window.innerWidth >= 768) return;
+      // If the scroll is primarily vertical, redirect it to horizontal
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        container.scrollLeft += e.deltaY;
+      }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (window.innerWidth >= 768) return;
+      if (e.touches.length > 0) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        scrollStartX = container.scrollLeft;
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (window.innerWidth >= 768) return;
+      if (e.touches.length > 0) {
+        const touchX = e.touches[0].clientX;
+        const touchY = e.touches[0].clientY;
+
+        const diffX = touchX - touchStartX;
+        const diffY = touchY - touchStartY;
+
+        // If the scroll is primarily vertical, intercept and convert it to horizontal
+        if (Math.abs(diffY) > Math.abs(diffX)) {
+          if (e.cancelable) {
+            e.preventDefault();
+          }
+          // Swiping up (negative diffY) moves the page right (increases scrollLeft)
+          // Swiping down (positive diffY) moves the page left (decreases scrollLeft)
+          container.scrollLeft = scrollStartX - diffY;
+        }
+      }
+    };
+
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    container.addEventListener('touchstart', handleTouchStart, { passive: true });
+    container.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+    return () => {
+      container.removeEventListener('wheel', handleWheel);
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, []);
+
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-screen bg-black md:overflow-hidden overflow-x-auto overflow-y-hidden no-scrollbar"
+      className="relative w-full h-screen bg-black md:overflow-hidden overflow-x-auto overflow-y-hidden no-scrollbar flex items-center"
     >
       {/* Desktop Top Left Brand (hidden on mobile) */}
       <div className="hidden md:flex md:absolute top-3 left-3 z-20 items-center gap-1">
@@ -159,9 +218,8 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
 
       {/* Mobile Full-Screen Navigation Drawer Overlay */}
       <div
-        className={`fixed inset-0 bg-black/95 z-50 flex flex-col justify-between p-8 md:hidden transition-all duration-300 ${
-          isMobileMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
-        }`}
+        className={`fixed inset-0 bg-black/95 z-50 flex flex-col justify-between p-8 md:hidden transition-all duration-300 ${isMobileMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
+          }`}
       >
         {/* Header in mobile drawer */}
         <div className="flex justify-between items-center w-full">
@@ -211,10 +269,10 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         </div>
       </div>
 
-      <div className="relative w-[1440px] md:w-full h-full z-10 flex-shrink-0">
+      <div className="relative w-[1440px] h-[900px] md:w-full md:h-full z-10 flex-shrink-0">
 
         {/* Video 9 Background (between 2.mp4 and 3.mp4) */}
-        <div className="absolute top-[42.5%] left-[52.9%] -translate-x-1/2 -translate-y-1/2 w-[39%] h-[35%] z-[-1] transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[42.5%] md:top-[42.5%] left-[52.9%] md:left-[52.9%] w-[35%] md:w-[39%] h-[28%] md:h-[35%] -translate-x-1/2 -translate-y-1/2 z-[-1] transition-all duration-500 hover:scale-110 cursor-pointer group">
           <video
             src="/9.mp4"
             autoPlay
@@ -229,7 +287,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         </div>
 
         {/* Video 1 Background (between 5.gif and 7.mp4) */}
-        <div className="absolute top-[62%] left-[50.5%] -translate-x-1/2 -translate-y-1/2 w-[18%] h-[20%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[62%] md:top-[62%] left-[50.5%] md:left-[50.5%] w-[18%] md:w-[18%] h-[20%] md:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <video
             src="/1.mp4"
             autoPlay
@@ -244,7 +302,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         </div>
 
         {/* Video 3 Background (left of 4.gif) */}
-        <div className="absolute top-[45.5%] left-[66.6%] -translate-x-1/2 -translate-y-1/2 w-[16%] h-[18%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[45.5%] md:top-[45.5%] left-[66.6%] md:left-[66.6%] w-[16%] md:w-[16%] h-[18%] md:h-[18%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <video
             src="/3.mp4"
             autoPlay
@@ -259,7 +317,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         </div>
 
         {/* Video 8 Background (left of 2.mp4) */}
-        <div className="absolute top-[45%] left-[35%] -translate-x-1/2 -translate-y-1/2 w-[10%] h-[20%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[45%] md:top-[45%] left-[35%] md:left-[35%] w-[10%] md:w-[10%] h-[20%] md:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <video
             src="/8.mp4"
             autoPlay
@@ -274,7 +332,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         </div>
 
         {/* Video Background */}
-        <div className="absolute top-[45.5%] left-[42.5%] -translate-x-1/2 -translate-y-1/2 w-[6%] h-[24%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[45.5%] md:top-[45.5%] left-[42.5%] md:left-[42.5%] w-[6%] md:w-[6%] h-[24%] md:h-[24%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <video
             src="/2.mp4"
             autoPlay
@@ -290,7 +348,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
 
 
         {/* Video 6 Background (below 4.gif, left side) */}
-        <div className="absolute top-[67%] left-[22%] -translate-x-1/2 -translate-y-1/2 w-[20%] h-[20%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[67%] md:top-[67%] left-[22%] md:left-[22%] w-[20%] md:w-[20%] h-[20%] md:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <video
             src="/6.mp4"
             autoPlay
@@ -305,7 +363,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         </div>
 
         {/* GIF 5 Background (below 2.mp4) */}
-        <div className="absolute top-[62.5%] left-[35.5%] -translate-x-1/2 -translate-y-1/2 w-[11%] h-[13%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[62.5%] md:top-[62.5%] left-[35.5%] md:left-[35.5%] w-[11%] md:w-[11%] h-[13%] md:h-[13%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <video
             src="/5.mp4"
             autoPlay
@@ -320,7 +378,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         </div>
 
         {/* GIF 4 Background (below nav, left side) */}
-        <div className="absolute top-[46%] left-[22%] -translate-x-1/2 -translate-y-1/2 w-[15%] h-[15%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[46%] md:top-[46%] left-[22%] md:left-[22%] w-[15%] md:w-[15%] h-[15%] md:h-[15%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <video
             src="/4.mp4"
             autoPlay
@@ -335,7 +393,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         </div>
 
         {/* GIF 4 Background (below nav, right side) */}
-        <div className="absolute top-[45%] left-[79.5%] -translate-x-1/2 -translate-y-1/2 w-[12%] h-[13%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[45%] md:top-[45%] left-[79.5%] md:left-[79.5%] w-[12%] md:w-[12%] h-[13%] md:h-[13%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <video
             src="/4.mp4"
             autoPlay
@@ -350,7 +408,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         </div>
 
         {/* Video 6 Background (below 4.gif, right side) */}
-        <div className="absolute top-[66%] left-[80%] -translate-x-1/2 -translate-y-1/2 w-[20%] h-[20%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[66%] md:top-[66%] left-[80%] md:left-[80%] w-[20%] md:w-[20%] h-[20%] md:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <video
             src="/6.mp4"
             autoPlay
@@ -365,7 +423,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         </div>
 
         {/* Video 7 Background */}
-        <div className="absolute top-[62.5%] left-[66%] -translate-x-1/2 -translate-y-1/2 w-[12%] h-[14%] z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[62.5%] md:top-[62.5%] left-[66%] md:left-[66%] w-[12%] md:w-[12%] h-[14%] md:h-[14%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <video
             src="/7.mp4"
             autoPlay
@@ -408,9 +466,8 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
 
       {/* Scroll prompt for mobile */}
       <div
-        className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-30 md:hidden transition-all duration-1000 ease-in-out ${
-          showScrollPrompt ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
-        }`}
+        className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-30 md:hidden transition-all duration-1000 ease-in-out ${showScrollPrompt ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+          }`}
       >
         <div className="flex items-center gap-3 bg-black px-7 py-3 rounded-full shadow-2xl border border-zinc-900">
           <span className="text-white font-canela text-sm sm:text-base font-medium tracking-wide chromatic-text whitespace-nowrap">
