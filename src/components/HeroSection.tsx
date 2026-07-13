@@ -68,6 +68,65 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
     };
   }, [isAnimationComplete]);
 
+  // Convert vertical scroll gestures to horizontal scroll in responsive view (< 768px)
+  React.useEffect(() => {
+    const container = sectionRef.current;
+    if (!container) return;
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let scrollStartX = 0;
+
+    const handleWheel = (e: WheelEvent) => {
+      if (window.innerWidth >= 768) return;
+      // If the scroll is primarily vertical, redirect it to horizontal
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        container.scrollLeft += e.deltaY;
+      }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (window.innerWidth >= 768) return;
+      if (e.touches.length > 0) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        scrollStartX = container.scrollLeft;
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (window.innerWidth >= 768) return;
+      if (e.touches.length > 0) {
+        const touchX = e.touches[0].clientX;
+        const touchY = e.touches[0].clientY;
+
+        const diffX = touchX - touchStartX;
+        const diffY = touchY - touchStartY;
+
+        // If the scroll is primarily vertical, intercept and convert it to horizontal
+        if (Math.abs(diffY) > Math.abs(diffX)) {
+          if (e.cancelable) {
+            e.preventDefault();
+          }
+          // Swiping up (negative diffY) moves the page right (increases scrollLeft)
+          // Swiping down (positive diffY) moves the page left (decreases scrollLeft)
+          container.scrollLeft = scrollStartX - diffY;
+        }
+      }
+    };
+
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    container.addEventListener('touchstart', handleTouchStart, { passive: true });
+    container.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+    return () => {
+      container.removeEventListener('wheel', handleWheel);
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, []);
+
   return (
     <section
       ref={sectionRef}
