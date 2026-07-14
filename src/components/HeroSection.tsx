@@ -69,7 +69,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
     };
   }, [isAnimationComplete]);
 
-  // Convert vertical scroll gestures to horizontal scroll in responsive view (< 768px)
+  // Convert vertical scroll gestures to horizontal scroll in responsive view (< 1440px)
   React.useEffect(() => {
     const container = sectionRef.current;
     if (!container) return;
@@ -79,7 +79,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
     let scrollStartX = 0;
 
     const handleWheel = (e: WheelEvent) => {
-      if (window.innerWidth >= 768) return;
+      if (window.innerWidth >= 1440) return;
       // If the scroll is primarily vertical, redirect it to horizontal
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
         e.preventDefault();
@@ -88,7 +88,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
     };
 
     const handleTouchStart = (e: TouchEvent) => {
-      if (window.innerWidth >= 768) return;
+      if (window.innerWidth >= 1440) return;
       if (e.touches.length > 0) {
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
@@ -97,7 +97,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      if (window.innerWidth >= 768) return;
+      if (window.innerWidth >= 1440) return;
       if (e.touches.length > 0) {
         const touchX = e.touches[0].clientX;
         const touchY = e.touches[0].clientY;
@@ -131,10 +131,10 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-screen bg-black md:overflow-hidden overflow-x-auto overflow-y-hidden no-scrollbar flex items-center"
+      className="relative w-full h-screen bg-black min-[1440px]:overflow-hidden overflow-x-auto overflow-y-hidden no-scrollbar flex items-center"
     >
       {/* Desktop Top Left Brand (hidden on mobile) */}
-      <div className="hidden md:flex md:absolute top-3 left-3 z-20 items-center gap-1">
+      <div className="hidden md:flex md:fixed top-3 left-3 z-20 items-center gap-1">
         <div className="relative w-48 h-48 flex-shrink-0 -translate-y-4">
           <Image
             src="/cosc logo.png"
@@ -153,12 +153,12 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
       </div>
 
       {/* Desktop Tagline (hidden on mobile) */}
-      <p className="hidden md:block md:absolute top-[145px] left-[190px] z-20 text-white/80 font-geometric text-xs tracking-[0.2em] uppercase whitespace-nowrap">
+      <p className="hidden md:block md:fixed top-[145px] left-[190px] z-20 text-white/80 font-geometric text-xs tracking-[0.2em] uppercase whitespace-nowrap">
         Learn &bull; Build &bull; Share &bull; Contribute
       </p>
 
       {/* Desktop Top Right Navigation (hidden on mobile) */}
-      <div className="absolute top-12 right-12 z-20 hidden md:grid grid-cols-2 gap-x-16 gap-y-3">
+      <div className="md:fixed top-12 right-12 z-20 hidden md:grid grid-cols-2 gap-x-16 gap-y-3">
         {navItems.map((item) => (
           <div key={item.id} className="flex items-baseline gap-4 group cursor-pointer">
             <span className="text-zinc-600 font-mono text-sm tracking-tighter group-hover:text-white transition-colors">
@@ -270,61 +270,61 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         </div>
       </div>
 
-      <div className="relative w-[1440px] h-[900px] md:w-full md:h-full z-10 flex-shrink-0">
+      <div className="relative w-[1440px] h-[900px] min-[1440px]:w-full min-[1440px]:h-full z-10 flex-shrink-0">
 
         {/* Video 9 Background (between 2.mp4 and 3.mp4) */}
-        <div className="absolute top-[42.5%] md:top-[42.5%] left-[53%] md:left-[52.9%] w-[36%] md:w-[39%] h-[28%] md:h-[35%] -translate-x-1/2 -translate-y-1/2 z-[-1] transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[42.5%] min-[1440px]:top-[42.5%] left-[53%] min-[1440px]:left-[52.9%] w-[36%] min-[1440px]:w-[39%] h-[28%] min-[1440px]:h-[35%] -translate-x-1/2 -translate-y-1/2 z-[-1] transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/9.mp4" posterSrc="/posters/9-poster.webp" />
         </div>
 
         {/* Video 1 Background (between 5.gif and 7.mp4) */}
-        <div className="absolute top-[60.4%] md:top-[62%] left-[50.5%] md:left-[50.5%] w-[19.9%] md:w-[18%] h-[20%] md:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[60.4%] min-[1440px]:top-[62%] left-[50.5%] min-[1440px]:left-[50.5%] w-[19.9%] min-[1440px]:w-[18%] h-[20%] min-[1440px]:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/1.mp4" posterSrc="/posters/1-poster.webp" />
         </div>
 
         {/* Video 3 Background (left of 4.gif) */}
-        <div className="absolute top-[45.5%] md:top-[45.5%] left-[68%] md:left-[66.6%] w-[14%] md:w-[16%] h-[16%] md:h-[18%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[45.5%] min-[1440px]:top-[45.5%] left-[68%] min-[1440px]:left-[66.6%] w-[14%] min-[1440px]:w-[16%] h-[16%] min-[1440px]:h-[18%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/3.mp4" posterSrc="/posters/3-poster.webp" />
         </div>
 
         {/* Video 8 Background (left of 2.mp4) */}
-        <div className="absolute top-[45%] md:top-[45%] left-[33%] md:left-[35%] w-[12%] md:w-[10%] h-[21%] md:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[45%] min-[1440px]:top-[45%] left-[33%] min-[1440px]:left-[35%] w-[12%] min-[1440px]:w-[10%] h-[21%] min-[1440px]:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/8.mp4" posterSrc="/posters/8-poster.webp" />
         </div>
 
         {/* Video Background */}
-        <div className="absolute top-[45.5%] md:top-[45.5%] left-[42%] md:left-[42.5%] w-[6.9%] md:w-[6%] h-[26%] md:h-[24%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[45.5%] min-[1440px]:top-[45.5%] left-[42%] min-[1440px]:left-[42.5%] w-[6.9%] min-[1440px]:w-[6%] h-[26%] min-[1440px]:h-[24%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/2.mp4" posterSrc="/posters/2-poster.webp" />
         </div>
 
 
         {/* Video 6 Background (below 4.gif, left side) */}
-        <div className="absolute top-[67%] md:top-[67%] left-[17%] md:left-[22%] w-[23%] md:w-[20%] h-[20%] md:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[67%] min-[1440px]:top-[67%] left-[17%] min-[1440px]:left-[22%] w-[23%] min-[1440px]:w-[20%] h-[20%] min-[1440px]:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/6.mp4" posterSrc="/posters/6-poster.webp" />
         </div>
 
         {/* GIF 5 Background (below 2.mp4) */}
-        <div className="absolute top-[60.8%] md:top-[62.5%] left-[34%] md:left-[35.5%] w-[13%] md:w-[11%] h-[13%] md:h-[13%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[60.8%] min-[1440px]:top-[62.5%] left-[34%] min-[1440px]:left-[35.5%] w-[13%] min-[1440px]:w-[11%] h-[13%] min-[1440px]:h-[13%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/5.mp4" posterSrc="/posters/5-poster.webp" />
         </div>
 
         {/* GIF 4 Background (below nav, left side) */}
-        <div className="absolute top-[46%] md:top-[46%] left-[20%] md:left-[22%] w-[13%] md:w-[15%] h-[15%] md:h-[15%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[46%] min-[1440px]:top-[46%] left-[20%] min-[1440px]:left-[22%] w-[13%] min-[1440px]:w-[15%] h-[15%] min-[1440px]:h-[15%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/4.mp4" posterSrc="/posters/4-poster.webp" />
         </div>
 
         {/* GIF 4 Background (below nav, right side) */}
-        <div className="absolute top-[45.7%] md:top-[45%] left-[82.7%] md:left-[79.5%] w-[17%] md:w-[12%] h-[10%] md:h-[13%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[45.7%] min-[1440px]:top-[45%] left-[82.7%] min-[1440px]:left-[79.5%] w-[17%] min-[1440px]:w-[12%] h-[10%] min-[1440px]:h-[13%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/4.mp4" posterSrc="/posters/4-poster.webp" />
         </div>
 
         {/* Video 6 Background (below 4.gif, right side) */}
-        <div className="absolute top-[64%] md:top-[66%] left-[82.7%] md:left-[80%] w-[17%] md:w-[20%] h-[16%] md:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[64%] min-[1440px]:top-[66%] left-[82.7%] min-[1440px]:left-[80%] w-[17%] min-[1440px]:w-[20%] h-[16%] min-[1440px]:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/6.mp4" posterSrc="/posters/6-poster.webp" />
         </div>
 
         {/* Video 7 Background */}
-        <div className="absolute top-[61%] md:top-[62.5%] left-[67.9%] md:left-[66%] w-[13%] md:w-[12%] h-[18%] md:h-[14%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[61%] min-[1440px]:top-[62.5%] left-[67.9%] min-[1440px]:left-[66%] w-[13%] min-[1440px]:w-[12%] h-[18%] min-[1440px]:h-[14%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/7.mp4" posterSrc="/posters/7-poster.webp" />
         </div>
 
@@ -357,7 +357,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
 
       {/* Scroll prompt for mobile */}
       <div
-        className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-30 md:hidden transition-all duration-1000 ease-in-out ${showScrollPrompt ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+        className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-30 min-[1440px]:hidden transition-all duration-1000 ease-in-out ${showScrollPrompt ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
           }`}
       >
         <div className="flex items-center gap-3 bg-black px-7 py-3 rounded-full shadow-2xl border border-zinc-900">
