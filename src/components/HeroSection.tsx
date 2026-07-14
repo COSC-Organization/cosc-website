@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import gsap from 'gsap';
 import VideoWithPoster from './VideoWithPoster';
 
 const navItems = [
@@ -19,71 +18,8 @@ interface HeroSectionProps {
 
 export default function HeroSection({ isAnimationComplete = true }: HeroSectionProps) {
   const sectionRef = React.useRef<HTMLDivElement>(null);
-  const buildingRef = React.useRef<HTMLDivElement>(null);
-  const entrancePlayedRef = React.useRef(false);
   const [showScrollPrompt, setShowScrollPrompt] = React.useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-
-  // ── Building Entrance: Set initial hidden state (runs before paint) ──
-  React.useLayoutEffect(() => {
-    if (!buildingRef.current) return;
-    const rooms = buildingRef.current.querySelectorAll('.room-module');
-    const frame = buildingRef.current.querySelector('.building-frame');
-    const triangle = buildingRef.current.querySelector('.building-triangle');
-    gsap.set(rooms, { autoAlpha: 0, scale: 0.8 });
-    gsap.set(frame, { autoAlpha: 0 });
-    gsap.set(triangle, { autoAlpha: 0, scale: 0 });
-  }, []);
-
-  // ── Building Entrance: Staggered cascade animation (bottom → top) ──
-  React.useEffect(() => {
-    if (!isAnimationComplete || !buildingRef.current || entrancePlayedRef.current) return;
-    entrancePlayedRef.current = true;
-
-    // Collect room modules and sort by vertical position (highest top% = bottom floor = first)
-    const rooms = Array.from(
-      buildingRef.current.querySelectorAll<HTMLElement>('.room-module')
-    );
-    rooms.sort(
-      (a, b) => parseFloat(b.dataset.top || '0') - parseFloat(a.dataset.top || '0')
-    );
-
-    const tl = gsap.timeline();
-
-    // 1. Building frame fades in first
-    tl.to('.building-frame', {
-      autoAlpha: 1,
-      duration: 0.5,
-      ease: 'power2.out',
-    });
-
-    // 2. Room modules pop in from bottom floor upwards
-    tl.to(
-      rooms,
-      {
-        autoAlpha: 1,
-        scale: 1,
-        duration: 0.55,
-        ease: 'back.out(1.7)',
-        stagger: 0.12,
-      },
-      '-=0.2'
-    );
-
-    // 3. Triangle snaps into place last
-    tl.to(
-      '.building-triangle',
-      {
-        autoAlpha: 1,
-        scale: 1,
-        duration: 0.4,
-        ease: 'back.out(2)',
-      },
-      '-=0.4'
-    );
-
-    return () => { tl.kill(); };
-  }, [isAnimationComplete]);
 
   React.useEffect(() => {
     const centerScroll = () => {
@@ -334,61 +270,61 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         </div>
       </div>
 
-      <div ref={buildingRef} className="relative w-[1440px] h-[900px] md:w-full md:h-full z-10 flex-shrink-0">
+      <div className="relative w-[1440px] h-[900px] md:w-full md:h-full z-10 flex-shrink-0">
 
         {/* Video 9 Background (between 2.mp4 and 3.mp4) */}
-        <div data-top="42.5" className="room-module absolute top-[42.5%] md:top-[42.5%] left-[52.9%] md:left-[52.9%] w-[35%] md:w-[39%] h-[28%] md:h-[35%] -translate-x-1/2 -translate-y-1/2 z-[-1] transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[42.5%] md:top-[42.5%] left-[52.9%] md:left-[52.9%] w-[35%] md:w-[39%] h-[28%] md:h-[35%] -translate-x-1/2 -translate-y-1/2 z-[-1] transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/9.mp4" posterSrc="/posters/9-poster.webp" />
         </div>
 
         {/* Video 1 Background (between 5.gif and 7.mp4) */}
-        <div data-top="62" className="room-module absolute top-[62%] md:top-[62%] left-[50.5%] md:left-[50.5%] w-[18%] md:w-[18%] h-[20%] md:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[62%] md:top-[62%] left-[50.5%] md:left-[50.5%] w-[18%] md:w-[18%] h-[20%] md:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/1.mp4" posterSrc="/posters/1-poster.webp" />
         </div>
 
         {/* Video 3 Background (left of 4.gif) */}
-        <div data-top="45.5" className="room-module absolute top-[45.5%] md:top-[45.5%] left-[66.6%] md:left-[66.6%] w-[16%] md:w-[16%] h-[18%] md:h-[18%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[45.5%] md:top-[45.5%] left-[66.6%] md:left-[66.6%] w-[16%] md:w-[16%] h-[18%] md:h-[18%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/3.mp4" posterSrc="/posters/3-poster.webp" />
         </div>
 
         {/* Video 8 Background (left of 2.mp4) */}
-        <div data-top="45" className="room-module absolute top-[45%] md:top-[45%] left-[35%] md:left-[35%] w-[10%] md:w-[10%] h-[20%] md:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[45%] md:top-[45%] left-[35%] md:left-[35%] w-[10%] md:w-[10%] h-[20%] md:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/8.mp4" posterSrc="/posters/8-poster.webp" />
         </div>
 
         {/* Video Background */}
-        <div data-top="45.5" className="room-module absolute top-[45.5%] md:top-[45.5%] left-[42.5%] md:left-[42.5%] w-[6%] md:w-[6%] h-[24%] md:h-[24%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[45.5%] md:top-[45.5%] left-[42.5%] md:left-[42.5%] w-[6%] md:w-[6%] h-[24%] md:h-[24%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/2.mp4" posterSrc="/posters/2-poster.webp" />
         </div>
 
 
         {/* Video 6 Background (below 4.gif, left side) */}
-        <div data-top="67" className="room-module absolute top-[67%] md:top-[67%] left-[22%] md:left-[22%] w-[20%] md:w-[20%] h-[20%] md:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[67%] md:top-[67%] left-[22%] md:left-[22%] w-[20%] md:w-[20%] h-[20%] md:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/6.mp4" posterSrc="/posters/6-poster.webp" />
         </div>
 
         {/* GIF 5 Background (below 2.mp4) */}
-        <div data-top="62.5" className="room-module absolute top-[62.5%] md:top-[62.5%] left-[35.5%] md:left-[35.5%] w-[11%] md:w-[11%] h-[13%] md:h-[13%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[62.5%] md:top-[62.5%] left-[35.5%] md:left-[35.5%] w-[11%] md:w-[11%] h-[13%] md:h-[13%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/5.mp4" posterSrc="/posters/5-poster.webp" />
         </div>
 
         {/* GIF 4 Background (below nav, left side) */}
-        <div data-top="46" className="room-module absolute top-[46%] md:top-[46%] left-[22%] md:left-[22%] w-[15%] md:w-[15%] h-[15%] md:h-[15%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[46%] md:top-[46%] left-[22%] md:left-[22%] w-[15%] md:w-[15%] h-[15%] md:h-[15%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/4.mp4" posterSrc="/posters/4-poster.webp" />
         </div>
 
         {/* GIF 4 Background (below nav, right side) */}
-        <div data-top="45" className="room-module absolute top-[45%] md:top-[45%] left-[79.5%] md:left-[79.5%] w-[12%] md:w-[12%] h-[13%] md:h-[13%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[45%] md:top-[45%] left-[79.5%] md:left-[79.5%] w-[12%] md:w-[12%] h-[13%] md:h-[13%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/4.mp4" posterSrc="/posters/4-poster.webp" />
         </div>
 
         {/* Video 6 Background (below 4.gif, right side) */}
-        <div data-top="66" className="room-module absolute top-[66%] md:top-[66%] left-[80%] md:left-[80%] w-[20%] md:w-[20%] h-[20%] md:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[66%] md:top-[66%] left-[80%] md:left-[80%] w-[20%] md:w-[20%] h-[20%] md:h-[20%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/6.mp4" posterSrc="/posters/6-poster.webp" />
         </div>
 
         {/* Video 7 Background */}
-        <div data-top="62.5" className="room-module absolute top-[62.5%] md:top-[62.5%] left-[66%] md:left-[66%] w-[12%] md:w-[12%] h-[14%] md:h-[14%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        <div className="absolute top-[62.5%] md:top-[62.5%] left-[66%] md:left-[66%] w-[12%] md:w-[12%] h-[14%] md:h-[14%] -translate-x-1/2 -translate-y-1/2 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
           <VideoWithPoster src="/7.mp4" posterSrc="/posters/7-poster.webp" />
         </div>
 
@@ -398,11 +334,11 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
           alt="COSC Community Hero"
           fill
           priority
-          className="building-frame object-cover relative z-10 pointer-events-none translate-y-26"
+          className="object-cover relative z-10 pointer-events-none translate-y-26"
         />
 
         {/* Centered Black 30-60-90 Triangle */}
-        <div className="building-triangle absolute top-[23%] left-[52%] -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none select-none">
+        <div className="absolute top-[23%] left-[52%] -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none select-none">
           <svg
             width="260"
             height="150"
