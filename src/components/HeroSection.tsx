@@ -270,7 +270,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         </div>
       </div>
 
-      <div className="relative w-[1440px] h-[900px] min-[1440px]:w-full min-[1440px]:h-full z-10 flex-shrink-0">
+      <div className="relative w-[1440px] h-[900px] min-[1440px]:w-full min-[1440px]:h-full z-10 flex-shrink-0 md:scale-100 scale-[0.8] origin-bottom">
 
         {/* Video 9 Background (between 2.mp4 and 3.mp4) */}
         <div className="absolute top-[42.5%] min-[1440px]:top-[42.5%] left-[53%] min-[1440px]:left-[52.9%] w-[36%] min-[1440px]:w-[39%] h-[28%] min-[1440px]:h-[35%] -translate-x-1/2 -translate-y-1/2 z-[-1] transition-all duration-500 hover:scale-110 cursor-pointer group">
