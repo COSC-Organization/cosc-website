@@ -148,37 +148,35 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
       className="relative w-full h-screen bg-black min-[1440px]:overflow-hidden overflow-x-auto overflow-y-hidden no-scrollbar flex items-center"
     >
       {/* Desktop Top Left Brand (hidden on mobile) */}
-      <div className="hidden md:flex md:fixed top-3 left-3 z-20 items-center gap-1">
-        <div className="relative w-48 h-48 flex-shrink-0 -translate-y-4">
+      <div className="hidden md:flex md:fixed top-2 left-1 lg:top-3 lg:left-2 xl:top-4 xl:left-3 z-20 items-center gap-1 lg:gap-2">
+        <div className="relative w-28 h-28 lg:w-36 lg:h-36 xl:w-44 xl:h-44 2xl:w-48 2xl:h-48 flex-shrink-0 -translate-y-2 lg:-translate-y-3 xl:-translate-y-4">
           <Image
             src="/cosc logo.png"
             alt="Canara Open Source Community Logo"
             fill
-            sizes="192px"
+            sizes="(max-width: 1024px) 112px, (max-width: 1280px) 144px, (max-width: 1536px) 176px, 192px"
             className="object-contain scale-125"
             priority
           />
         </div>
-        <div className="-ml-6">
-          <h1 className="text-white text-5xl font-bold tracking-tighter uppercase font-canela leading-none -translate-y-[18%]">
-            Canara Open Source<br></br> Community
+        <div className="-ml-3 lg:-ml-4 xl:-ml-6 -translate-y-[10%] lg:-translate-y-[14%] xl:-translate-y-[18%]">
+          <h1 className="text-white text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold tracking-tighter uppercase font-canela leading-none">
+            Canara Open Source<br />Community
           </h1>
+          <p className="text-white/80 font-geometric text-[9px] lg:text-[10px] xl:text-xs tracking-[0.15em] lg:tracking-[0.18em] xl:tracking-[0.2em] uppercase whitespace-nowrap mt-1 lg:mt-1.5 xl:mt-2">
+            Learn &bull; Build &bull; Share &bull; Contribute
+          </p>
         </div>
       </div>
 
-      {/* Desktop Tagline (hidden on mobile) */}
-      <p className="hidden md:block md:fixed top-[145px] left-[190px] z-20 text-white/80 font-geometric text-xs tracking-[0.2em] uppercase whitespace-nowrap">
-        Learn &bull; Build &bull; Share &bull; Contribute
-      </p>
-
       {/* Desktop Top Right Navigation (hidden on mobile) */}
-      <div className="md:fixed top-12 right-12 z-20 hidden md:grid grid-cols-2 gap-x-16 gap-y-3">
+      <div className="md:fixed top-2 right-4 lg:top-3 lg:right-6 xl:top-4 xl:right-8 2xl:top-6 2xl:right-12 z-20 hidden md:grid grid-cols-2 gap-x-8 gap-y-2 lg:gap-x-12 lg:gap-y-2.5 xl:gap-x-16 xl:gap-y-3">
         {navItems.map((item) => (
-          <div key={item.id} className="flex items-baseline gap-4 group cursor-pointer">
-            <span className="text-zinc-600 font-mono text-sm tracking-tighter group-hover:text-white transition-colors">
+          <div key={item.id} className="flex items-baseline gap-2.5 lg:gap-3.5 xl:gap-4 group cursor-pointer">
+            <span className="text-zinc-600 font-mono text-xs lg:text-sm xl:text-base tracking-tighter group-hover:text-white transition-colors">
               {item.id}
             </span>
-            <span className="text-zinc-300 text-[10px] sm:text-xs font-geometric font-medium tracking-[0.2em] uppercase group-hover:text-white transition-colors">
+            <span className="text-zinc-300 text-[11px] lg:text-xs xl:text-sm font-geometric font-medium tracking-[0.15em] lg:tracking-[0.18em] xl:tracking-[0.2em] uppercase group-hover:text-white transition-colors">
               {item.label}
             </span>
           </div>
@@ -186,16 +184,16 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
       </div>
 
       {/* Mobile Header (hidden on desktop) */}
-      <div className="md:hidden block fixed top-0 left-0 w-full z-20 p-6 pointer-events-none">
+      <div className="md:hidden block fixed top-0 left-0 w-full z-20 p-4 sm:p-6 pointer-events-none">
         <div className="flex justify-between items-center w-full pointer-events-auto">
           {/* Top Left Circular Logo Badge */}
-          <div className="relative w-12 h-12 flex-shrink-0">
+          <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 -ml-4 sm:-ml-5 -mt-2">
             <Image
               src="/cosc logo.png"
               alt="Canara Open Source Community Logo"
               fill
-              sizes="48px"
-              className="object-contain"
+              sizes="(max-width: 640px) 80px, 96px"
+              className="object-contain scale-135"
               priority
             />
           </div>
@@ -203,10 +201,10 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
           {/* Top Right Bento Grid Navigation Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(true)}
-            className="text-white hover:text-zinc-300 transition-colors p-1 cursor-pointer"
+            className="text-white hover:text-zinc-300 transition-colors p-1 cursor-pointer -mt-3 sm:-mt-4"
             aria-label="Open Navigation Menu"
           >
-            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+            <svg className="w-7 h-7 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="currentColor">
               <rect x="3" y="3" width="4" height="4" rx="1" />
               <rect x="10" y="3" width="4" height="4" rx="1" />
               <rect x="17" y="3" width="4" height="4" rx="1" />
@@ -221,11 +219,11 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         </div>
 
         {/* Left-Aligned Stacked Heading & Tagline */}
-        <div className="mt-8 pointer-events-auto select-none">
-          <h1 className="text-white text-3xl font-bold tracking-tight uppercase font-canela leading-tight">
+        <div className="mt-2 sm:mt-4 pointer-events-auto select-none">
+          <h1 className="text-white text-2xl sm:text-3xl font-bold tracking-tight uppercase font-canela leading-tight">
             Canara Open Source<br />Community
           </h1>
-          <p className="text-white/80 font-geometric text-[11px] tracking-[0.18em] uppercase mt-2">
+          <p className="text-white/80 font-geometric text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.18em] uppercase mt-1.5 sm:mt-2">
             Learn &bull; Build &bull; Share &bull; Contribute
           </p>
         </div>
@@ -233,43 +231,43 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
 
       {/* Mobile Full-Screen Navigation Drawer Overlay */}
       <div
-        className={`fixed inset-0 bg-black/95 z-50 flex flex-col justify-between p-8 md:hidden transition-all duration-300 ${isMobileMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
+        className={`fixed inset-0 bg-black/95 z-50 flex flex-col justify-between p-6 sm:p-8 md:hidden transition-all duration-300 ${isMobileMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
           }`}
       >
         {/* Header in mobile drawer */}
         <div className="flex justify-between items-center w-full">
-          <div className="relative w-12 h-12">
+          <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 -ml-4 sm:-ml-5 -mt-2">
             <Image
               src="/cosc logo.png"
               alt="Canara Open Source Community Logo"
               fill
-              sizes="48px"
-              className="object-contain"
+              sizes="(max-width: 640px) 80px, 96px"
+              className="object-contain scale-135"
             />
           </div>
           <button
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-zinc-400 hover:text-white transition-colors p-1 cursor-pointer"
+            className="text-zinc-400 hover:text-white transition-colors p-2 cursor-pointer -mt-3 sm:-mt-4"
             aria-label="Close Navigation Menu"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
         {/* Menu Navigation Links */}
-        <div className="flex flex-col gap-5 my-auto">
+        <div className="flex flex-col gap-3.5 sm:gap-5 my-auto">
           {navItems.map((item) => (
             <div
               key={item.id}
-              className="flex items-baseline gap-4 group cursor-pointer border-b border-zinc-900 pb-2"
+              className="flex items-baseline gap-3.5 sm:gap-4 group cursor-pointer border-b border-zinc-900 pb-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <span className="text-zinc-600 font-mono text-sm tracking-tighter">
+              <span className="text-zinc-600 font-mono text-sm sm:text-base tracking-tighter">
                 {item.id}
               </span>
-              <span className="text-zinc-200 text-lg font-geometric font-medium tracking-[0.15em] uppercase group-hover:text-white transition-colors">
+              <span className="text-zinc-200 text-lg sm:text-xl font-geometric font-medium tracking-[0.12em] sm:tracking-[0.15em] uppercase group-hover:text-white transition-colors">
                 {item.label}
               </span>
             </div>
@@ -277,8 +275,8 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         </div>
 
         {/* Footer Tagline in mobile drawer */}
-        <div className="text-center pb-4">
-          <p className="text-zinc-500 font-geometric text-[9px] tracking-[0.2em] uppercase">
+        <div className="text-center pb-2 sm:pb-4">
+          <p className="text-zinc-500 font-geometric text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.2em] uppercase">
             Learn &bull; Build &bull; Share &bull; Contribute
           </p>
         </div>
@@ -286,86 +284,86 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
 
       <div className="relative w-[1440px] h-[900px] min-[1440px]:w-full min-[1440px]:h-full z-10 flex-shrink-0">
 
-          {/* Video 9 Background (between 2.mp4 and 3.mp4) */}
-          <div className="absolute max-md:top-[35%] top-[42.5%] min-[1440px]:top-[42.5%] left-[53%] min-[1440px]:left-[52.9%] max-md:w-[44%] w-[36%] min-[1440px]:w-[39%] max-md:h-[30%] h-[28%] min-[1440px]:h-[35%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-[-1] transition-all duration-500 hover:scale-110 cursor-pointer group">
-            <VideoWithPoster src="/9.mp4" posterSrc="/posters/9-poster.webp" />
-          </div>
+        {/* Video 9 Background (between 2.mp4 and 3.mp4) */}
+        <div className="absolute max-md:top-[35%] top-[42.5%] min-[1440px]:top-[42.5%] left-[53%] min-[1440px]:left-[52.9%] max-md:w-[44%] w-[36%] min-[1440px]:w-[39%] max-md:h-[30%] h-[28%] min-[1440px]:h-[35%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-[-1] transition-all duration-500 hover:scale-110 cursor-pointer group">
+          <VideoWithPoster src="/9.mp4" posterSrc="/posters/9-poster.webp" />
+        </div>
 
-          {/* Video 1 Background (between 5.gif and 7.mp4) */}
-          <div className="absolute max-md:top-[55%] top-[60.4%] min-[1440px]:top-[62%] left-[50.5%] min-[1440px]:left-[50.5%] w-[19.9%] min-[1440px]:w-[18%] h-[20%] min-[1440px]:h-[20%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
-            <VideoWithPoster src="/1.mp4" posterSrc="/posters/1-poster.webp" />
-          </div>
+        {/* Video 1 Background (between 5.gif and 7.mp4) */}
+        <div className="absolute max-md:top-[55%] top-[60.4%] min-[1440px]:top-[62%] left-[50.5%] min-[1440px]:left-[50.5%] w-[19.9%] min-[1440px]:w-[18%] h-[20%] min-[1440px]:h-[20%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+          <VideoWithPoster src="/1.mp4" posterSrc="/posters/1-poster.webp" />
+        </div>
 
-          {/* Video 3 Background (left of 4.gif) */}
-          <div className="absolute max-md:top-[44%] top-[45.5%] min-[1440px]:top-[45.5%] left-[68%] min-[1440px]:left-[66.6%] w-[14%] min-[1440px]:w-[16%] h-[16%] min-[1440px]:h-[18%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
-            <VideoWithPoster src="/3.mp4" posterSrc="/posters/3-poster.webp" />
-          </div>
+        {/* Video 3 Background (left of 4.gif) */}
+        <div className="absolute max-md:top-[44%] top-[45.5%] min-[1440px]:top-[45.5%] left-[68%] min-[1440px]:left-[66.6%] w-[14%] min-[1440px]:w-[16%] h-[16%] min-[1440px]:h-[18%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+          <VideoWithPoster src="/3.mp4" posterSrc="/posters/3-poster.webp" />
+        </div>
 
-          {/* Video 8 Background (left of 2.mp4) */}
-          <div className="absolute max-md:top-[41%] top-[45%] min-[1440px]:top-[45%] left-[33%] min-[1440px]:left-[35%] w-[12%] min-[1440px]:w-[10%] h-[21%] min-[1440px]:h-[20%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
-            <VideoWithPoster src="/8.mp4" posterSrc="/posters/8-poster.webp" />
-          </div>
+        {/* Video 8 Background (left of 2.mp4) */}
+        <div className="absolute max-md:top-[41%] top-[45%] min-[1440px]:top-[45%] left-[33%] min-[1440px]:left-[35%] w-[12%] min-[1440px]:w-[10%] h-[21%] min-[1440px]:h-[20%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+          <VideoWithPoster src="/8.mp4" posterSrc="/posters/8-poster.webp" />
+        </div>
 
-          {/* Video Background */}
-          <div className="absolute max-md:top-[39%] top-[45.5%] min-[1440px]:top-[45.5%] left-[42%] min-[1440px]:left-[42.5%] w-[6.9%] min-[1440px]:w-[6%] h-[26%] min-[1440px]:h-[24%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
-            <VideoWithPoster src="/2.mp4" posterSrc="/posters/2-poster.webp" />
-          </div>
+        {/* Video Background */}
+        <div className="absolute max-md:top-[39%] top-[45.5%] min-[1440px]:top-[45.5%] left-[42%] min-[1440px]:left-[42.5%] w-[6.9%] min-[1440px]:w-[6%] h-[26%] min-[1440px]:h-[24%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+          <VideoWithPoster src="/2.mp4" posterSrc="/posters/2-poster.webp" />
+        </div>
 
-          {/* Video 6 Background (below 4.gif, left side) */}
-          <div className="absolute max-md:top-[62%] top-[67%] min-[1440px]:top-[67%] left-[17%] min-[1440px]:left-[22%] w-[23%] min-[1440px]:w-[20%] h-[20%] min-[1440px]:h-[20%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
-            <VideoWithPoster src="/6.mp4" posterSrc="/posters/6-poster.webp" />
-          </div>
+        {/* Video 6 Background (below 4.gif, left side) */}
+        <div className="absolute max-md:top-[62%] top-[67%] min-[1440px]:top-[67%] left-[17%] min-[1440px]:left-[22%] w-[23%] min-[1440px]:w-[20%] h-[20%] min-[1440px]:h-[20%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+          <VideoWithPoster src="/6.mp4" posterSrc="/posters/6-poster.webp" />
+        </div>
 
-          {/* GIF 5 Background (below 2.mp4) */}
-          <div className="absolute max-md:top-[60%] top-[60.8%] min-[1440px]:top-[62.5%] left-[34%] min-[1440px]:left-[35.5%] w-[13%] min-[1440px]:w-[11%] h-[13%] min-[1440px]:h-[13%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
-            <VideoWithPoster src="/5.mp4" posterSrc="/posters/5-poster.webp" />
-          </div>
+        {/* GIF 5 Background (below 2.mp4) */}
+        <div className="absolute max-md:top-[60%] top-[60.8%] min-[1440px]:top-[62.5%] left-[34%] min-[1440px]:left-[35.5%] w-[13%] min-[1440px]:w-[11%] h-[13%] min-[1440px]:h-[13%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+          <VideoWithPoster src="/5.mp4" posterSrc="/posters/5-poster.webp" />
+        </div>
 
-          {/* GIF 4 Background (below nav, left side) */}
-          <div className="absolute top-[46%] min-[1440px]:top-[46%] left-[20%] min-[1440px]:left-[22%] w-[13%] min-[1440px]:w-[15%] h-[15%] min-[1440px]:h-[15%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
-            <VideoWithPoster src="/4.mp4" posterSrc="/posters/4-poster.webp" />
-          </div>
+        {/* GIF 4 Background (below nav, left side) */}
+        <div className="absolute top-[46%] min-[1440px]:top-[46%] left-[20%] min-[1440px]:left-[22%] w-[13%] min-[1440px]:w-[15%] h-[15%] min-[1440px]:h-[15%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+          <VideoWithPoster src="/4.mp4" posterSrc="/posters/4-poster.webp" />
+        </div>
 
-          {/* GIF 4 Background (below nav, right side) */}
-          <div className="absolute top-[45.7%] min-[1440px]:top-[45%] left-[82.7%] min-[1440px]:left-[79.5%] w-[17%] min-[1440px]:w-[12%] h-[10%] min-[1440px]:h-[13%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
-            <VideoWithPoster src="/4.mp4" posterSrc="/posters/4-poster.webp" />
-          </div>
+        {/* GIF 4 Background (below nav, right side) */}
+        <div className="absolute top-[45.7%] min-[1440px]:top-[45%] left-[82.7%] min-[1440px]:left-[79.5%] w-[17%] min-[1440px]:w-[12%] h-[10%] min-[1440px]:h-[13%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+          <VideoWithPoster src="/4.mp4" posterSrc="/posters/4-poster.webp" />
+        </div>
 
-          {/* Video 6 Background (below 4.gif, right side) */}
-          <div className="absolute max-md:top-[62%] top-[64%] min-[1440px]:top-[66%] left-[82.7%] min-[1440px]:left-[80%] w-[17%] min-[1440px]:w-[20%] h-[16%] min-[1440px]:h-[20%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
-            <VideoWithPoster src="/6.mp4" posterSrc="/posters/6-poster.webp" />
-          </div>
+        {/* Video 6 Background (below 4.gif, right side) */}
+        <div className="absolute max-md:top-[62%] top-[64%] min-[1440px]:top-[66%] left-[82.7%] min-[1440px]:left-[80%] w-[17%] min-[1440px]:w-[20%] h-[16%] min-[1440px]:h-[20%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+          <VideoWithPoster src="/6.mp4" posterSrc="/posters/6-poster.webp" />
+        </div>
 
-          {/* Video 7 Background */}
-          <div className="absolute max-md:top-[57%] top-[61%] min-[1440px]:top-[62.5%] left-[67.9%] min-[1440px]:left-[66%] w-[13%] min-[1440px]:w-[12%] h-[18%] min-[1440px]:h-[14%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
-            <VideoWithPoster src="/7.mp4" posterSrc="/posters/7-poster.webp" />
-          </div>
+        {/* Video 7 Background */}
+        <div className="absolute max-md:top-[57%] top-[61%] min-[1440px]:top-[62.5%] left-[67.9%] min-[1440px]:left-[66%] w-[13%] min-[1440px]:w-[12%] h-[18%] min-[1440px]:h-[14%] -translate-x-1/2 -translate-y-1/2 max-md:translate-y-10 z-0 transition-all duration-500 hover:scale-110 cursor-pointer group">
+          <VideoWithPoster src="/7.mp4" posterSrc="/posters/7-poster.webp" />
+        </div>
 
-          {/* Building Image */}
-          <Image
-            src="/building3.webp"
-            alt="COSC Community Hero"
-            fill
-            priority
-            className="object-cover relative z-10 pointer-events-none translate-y-48 md:translate-y-26"
-          />
+        {/* Building Image */}
+        <Image
+          src="/building3.webp"
+          alt="COSC Community Hero"
+          fill
+          priority
+          className="object-cover relative z-10 pointer-events-none translate-y-48 md:translate-y-26"
+        />
 
-          {/* Centered Black 30-60-90 Triangle */}
-          <div className="absolute top-[23%] left-[52%] -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none select-none">
-            <svg
-              width="260"
-              height="150"
-              viewBox="0 0 260 150"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="rotate-160"
-            >
-              <path
-                d="M 0,0 L 0,150 L 260,150 Z"
-                fill="#000000"
-              />
-            </svg>
-          </div>
+        {/* Centered Black 30-60-90 Triangle */}
+        <div className="absolute top-[23%] left-[52%] -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none select-none">
+          <svg
+            width="260"
+            height="150"
+            viewBox="0 0 260 150"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="rotate-160"
+          >
+            <path
+              d="M 0,0 L 0,150 L 260,150 Z"
+              fill="#000000"
+            />
+          </svg>
+        </div>
       </div>
 
       {/* Scroll prompt for mobile */}
