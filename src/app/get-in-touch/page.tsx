@@ -4,10 +4,13 @@ import ContactHero from "@/components/contact/ContactHero";
 import ContactNav from "@/components/contact/ContactNav";
 import ContributeSection from "@/components/contact/ContributeSection";
 import SectionDivider from "@/components/contact/SectionDivider";
+import BackgroundPattern from "@/components/contact/BackgroundPattern";
+import FooterCTA from "@/components/contact/FooterCTA";
 
 export default function GetInTouchPage() {
   return (
     <main className="min-h-screen overflow-x-hidden bg-black text-white">
+        <BackgroundPattern />
       <ContactNav />
 
       <ContactHero />
@@ -20,6 +23,7 @@ export default function GetInTouchPage() {
 
       <SectionDivider number="03" title="Message" />
       <ContactForm />
+      <FooterCTA />
     </main>
   );
 }

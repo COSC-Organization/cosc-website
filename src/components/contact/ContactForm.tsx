@@ -75,14 +75,15 @@ export default function ContactForm() {
           </div>
 
           <button
-            type="submit"
-            className="group mt-4 inline-flex w-full items-center justify-center border border-[#D89A3D] px-8 py-4 text-xs uppercase tracking-[0.3em] transition hover:bg-[#D89A3D] hover:text-black sm:w-auto"
-          >
-            Send Message
-            <span className="ml-3 transition-transform group-hover:translate-x-2">
-              →
-            </span>
-          </button>
+  type="submit"
+  className="group mt-4 inline-flex w-full items-center justify-center border border-[#D89A3D] px-8 py-4 text-xs uppercase tracking-[0.3em] transition-all duration-300 hover:bg-[#D89A3D] hover:text-black hover:shadow-[0_0_35px_rgba(216,154,61,0.2)] sm:w-auto"
+>
+  Send Message
+
+  <span className="ml-3 transition-transform duration-300 group-hover:translate-x-2">
+    →
+  </span>
+</button>
         </form>
       </div>
       </div>
