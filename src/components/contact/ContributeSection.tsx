@@ -12,7 +12,7 @@ const domains = [
 
 export default function ContributeSection() {
   return (
-<section className="relative mx-auto w-full max-w-7xl px-5 py-24 sm:px-8 md:px-10 lg:px-12">
+<section className="relative mx-auto w-full max-w-7xl px-5 py-24 sm:px-8 md:px-10 lg:px-12" id = "contribute">
     <SectionTitle title="CONTRIBUTE" />
     <div className="relative z-10">
  <div className="grid gap-16 lg:grid-cols-2 lg:items-start">

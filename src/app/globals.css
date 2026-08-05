@@ -31,7 +31,9 @@
   --font-geometric: 'Outfit', sans-serif;
 }
 
-
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   background: var(--background);

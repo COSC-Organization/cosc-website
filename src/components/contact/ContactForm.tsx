@@ -2,7 +2,7 @@ import SectionTitle from "./SectionTitle";
 
 export default function ContactForm() {
   return (
-<section className="relative mx-auto w-full max-w-7xl px-5 py-24 sm:px-8 md:px-10 lg:px-12">
+<section className="relative mx-auto w-full max-w-7xl px-5 py-24 sm:px-8 md:px-10 lg:px-12" id = "message">
     <SectionTitle title="MESSAGE" />
 
     <div className="relative z-10">

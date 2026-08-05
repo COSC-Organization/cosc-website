@@ -25,7 +25,7 @@ import SectionTitle from "./SectionTitle";
 
 export default function ContactCards() {
   return (
-    <section className="relative mx-auto w-full max-w-7xl px-5 py-24 sm:px-8 md:px-10 lg:px-12">
+    <section className="relative mx-auto w-full max-w-7xl px-5 py-24 sm:px-8 md:px-10 lg:px-12" id = "contact">
       <SectionTitle title="CONTACT" />
 
       <div className="relative z-10">
