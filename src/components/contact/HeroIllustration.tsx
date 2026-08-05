@@ -1,95 +1,116 @@
 export default function HeroIllustration() {
   return (
-    <div className="relative mx-auto w-full max-w-lg opacity-90">
+    <div className="relative mx-auto w-full max-w-xl">
       <svg
-        viewBox="0 0 500 600"
+        viewBox="0 0 700 700"
         className="h-auto w-full"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
         {/* Ground */}
         <line
-          x1="40"
-          y1="520"
-          x2="460"
-          y2="520"
-          stroke="#2A2A2A"
-          strokeWidth="1"
+          x1="60"
+          y1="600"
+          x2="640"
+          y2="600"
+          stroke="#2d2d2d"
         />
 
-        {/* Building */}
+        {/* Main building */}
         <rect
-          x="150"
-          y="120"
-          width="200"
-          height="320"
-          stroke="#E8E8E8"
+          x="220"
+          y="170"
+          width="260"
+          height="340"
+          stroke="#f5f5f5"
           strokeWidth="2"
         />
 
         {/* Roof */}
         <polygon
-          points="130,120 250,60 370,120"
-          stroke="#E8E8E8"
+          points="190,170 350,90 510,170"
+          stroke="#f5f5f5"
           strokeWidth="2"
         />
 
+        {/* Steps */}
+        <line x1="250" y1="510" x2="450" y2="510" stroke="#555" />
+        <line x1="240" y1="525" x2="460" y2="525" stroke="#555" />
+        <line x1="230" y1="540" x2="470" y2="540" stroke="#555" />
+
         {/* Door */}
         <rect
-          x="225"
-          y="330"
-          width="50"
-          height="110"
+          x="315"
+          y="390"
+          width="70"
+          height="120"
           stroke="#D89A3D"
           strokeWidth="2"
         />
 
         {/* Windows */}
-        {Array.from({ length: 4 }).map((_, row) =>
-          Array.from({ length: 3 }).map((_, col) => (
+        {Array.from({ length: 5 }).map((_, row) =>
+          Array.from({ length: 4 }).map((_, col) => (
             <rect
               key={`${row}-${col}`}
-              x={180 + col * 45}
-              y={160 + row * 45}
+              x={250 + col * 50}
+              y={205 + row * 45}
               width="22"
               height="22"
-              stroke="#999"
-              strokeWidth="1"
+              stroke="#8a8a8a"
             />
           ))
         )}
 
-        {/* Trees */}
+        {/* Left tree */}
         <circle
-          cx="90"
-          cy="390"
-          r="28"
+          cx="120"
+          cy="410"
+          r="34"
           stroke="#D89A3D"
           strokeWidth="2"
         />
-
         <line
-          x1="90"
-          y1="418"
-          x2="90"
-          y2="470"
-          stroke="#999"
+          x1="120"
+          y1="444"
+          x2="120"
+          y2="520"
+          stroke="#888"
         />
 
+        {/* Right tree */}
         <circle
-          cx="410"
-          cy="390"
-          r="28"
+          cx="580"
+          cy="410"
+          r="34"
           stroke="#D89A3D"
           strokeWidth="2"
         />
-
         <line
-          x1="410"
-          y1="418"
-          x2="410"
-          y2="470"
-          stroke="#999"
+          x1="580"
+          y1="444"
+          x2="580"
+          y2="520"
+          stroke="#888"
+        />
+
+        {/* Birds */}
+        <path
+          d="M170 110 Q180 100 190 110"
+          stroke="#777"
+        />
+        <path
+          d="M205 90 Q215 80 225 90"
+          stroke="#777"
+        />
+
+        {/* Decorative frame */}
+        <rect
+          x="40"
+          y="40"
+          width="620"
+          height="620"
+          stroke="#222"
         />
       </svg>
     </div>

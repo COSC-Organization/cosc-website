@@ -6,11 +6,13 @@ import ContributeSection from "@/components/contact/ContributeSection";
 import SectionDivider from "@/components/contact/SectionDivider";
 import BackgroundPattern from "@/components/contact/BackgroundPattern";
 import FooterCTA from "@/components/contact/FooterCTA";
+import BackHome from "@/components/contact/BackHome";
 
 export default function GetInTouchPage() {
   return (
     <main className="min-h-screen overflow-x-hidden bg-black text-white">
         <BackgroundPattern />
+        <BackHome />
       <ContactNav />
 
       <ContactHero />

@@ -12,16 +12,16 @@ const cards = [
     value: "COSC-Organization",
     href: "https://github.com/COSC-Organization",
   },
-  {
-    title: "Instagram",
-    value: "@cosc_cec",
-    href: "#",
-  },
-  {
-    title: "Discord",
-    value: "Join Community",
-    href: "#",
-  },
+//   {
+//     title: "Instagram",
+//     value: "@cosc_cec",
+//     href: "#",
+//   },
+//   {
+//     title: "Discord",
+//     value: "Join Community",
+//     href: "#",
+//   },
 ];
 
 export default function ContactCards() {

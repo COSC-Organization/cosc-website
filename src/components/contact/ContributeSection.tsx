@@ -39,14 +39,16 @@ export default function ContributeSection() {
         </FadeIn>
 
         <FadeIn delay={0.15}>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-          {domains.map((domain) => (
+<div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
+              {domains.map((domain) => (
             <div
-              key={domain}
-              className="rounded-xl border border-neutral-800 px-5 py-6 text-center text-sm uppercase tracking-[0.2em] transition-all duration-300 hover:border-[#D89A3D] hover:bg-neutral-950"
-            >
-              {domain}
-            </div>
+  key={domain}
+  className="flex min-h-[90px] items-center justify-center border border-neutral-800 px-3 py-5 text-center transition-all duration-300 hover:border-[#D89A3D] hover:bg-[#0A0A0A]"
+>
+  <span className="break-words text-center text-xs uppercase tracking-[0.18em] text-white sm:text-sm sm:tracking-[0.22em]">
+    {domain}
+  </span>
+</div>
           ))}
         </div>
         </FadeIn>
