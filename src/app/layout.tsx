@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Cormorant } from 'next/font/google';
 import './globals.css';
+import Header from '@/components/header';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -48,7 +49,10 @@ export default function RootLayout({
         <link rel="preload" href="/4.mp4" as="video" type="video/mp4" />
         <link rel="preload" href="/5.mp4" as="video" type="video/mp4" />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

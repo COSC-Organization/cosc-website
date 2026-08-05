@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 
 // --- Core Components & Hooks ---
-import HeroLogo from '@/components/HeroLogo';
 import { useAssetPreloader } from '@/hooks/useAssetPreloader';
 
 // --- Font Setup ---
@@ -372,21 +371,6 @@ export default function ProjectsPage() {
   const [projectsData, setProjectsData] = useState<Project[]>([]);
   const [activeFilter, setActiveFilter] = useState<(typeof categories)[number]>("All Projects");
 
-  const [isAnimationComplete, setIsAnimationComplete] = useState(false);
-  const [isOverlayMounted, setIsOverlayMounted] = useState(true);
-  const { imagesReady } = useAssetPreloader();
-
-  const readyToReveal = isAnimationComplete && imagesReady;
-
-  useEffect(() => {
-    if (readyToReveal) {
-      const timer = setTimeout(() => {
-        setIsOverlayMounted(false);
-      }, 1200);
-      return () => clearTimeout(timer);
-    }
-  }, [readyToReveal]);
-
   // Clean public fetch for GitHub Organization & User repositories with full TypeScript compliance
   useEffect(() => {
     async function fetchGitHubReposAutomatically() {
@@ -477,28 +461,7 @@ export default function ProjectsPage() {
         }
       `}</style>
 
-      {/* Loading Overlay */}
-      {isOverlayMounted && (
-        <div
-          className={`fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-white transition-opacity duration-1000 ease-out ${
-            readyToReveal ? 'opacity-0 pointer-events-none' : 'opacity-100'
-          }`}
-          onTransitionEnd={(e) => {
-            if (e.propertyName === 'opacity') {
-              setIsOverlayMounted(false);
-            }
-          }}
-          aria-hidden="true"
-        >
-          <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-zinc-100/50 via-zinc-50 to-white" />
 
-          <div className="relative z-10">
-            <HeroLogo
-              onTransitionComplete={() => setIsAnimationComplete(true)}
-            />
-          </div>
-        </div>
-      )}
 
       <div
         className="fixed inset-0 pointer-events-none opacity-[0.05] mix-blend-screen z-0"
