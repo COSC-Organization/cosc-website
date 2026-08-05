@@ -4,13 +4,13 @@ import { useRouter } from 'next/navigation';
 import VideoWithPoster from './VideoWithPoster';
 
 const navItems = [
-  { id: '01', label: 'About Us' },
-  { id: '02', label: 'Blogs' },
-  { id: '03', label: 'Events' },
-  { id: '04', label: 'Projects' },
-  { id: '05', label: 'Workshops' },
-  { id: '06', label: 'Team' },
-  { id: '07', label: 'Get In Touch' },
+  { id: '01', label: 'About Us', href: '/#about' },
+  { id: '02', label: 'Blogs', href: '/blogs' },
+  { id: '03', label: 'Events', href: '/events' },
+  { id: '04', label: 'Projects', href: '/projects' },
+  { id: '05', label: 'Workshops', href: '/workshops' },
+  { id: '06', label: 'Team', href: '/team' },
+  { id: '07', label: 'Get In Touch', href: '/#contact' },
 ];
 
 interface HeroSectionProps {
@@ -171,6 +171,27 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
     };
   }, []);
 
+  const handleNavClick = (href: string, label: string) => {
+    setIsMobileMenuOpen(false);
+    if (label === 'Team' || href === '/team') {
+      router.push('/team');
+      return;
+    }
+    if (label === 'Projects' || href === '/projects') {
+      router.push('/projects');
+      return;
+    }
+    if (href.startsWith('/#')) {
+      const hash = href.replace('/', '');
+      const el = document.querySelector(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+    }
+    router.push(href);
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -204,11 +225,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
           <div
             key={item.id}
             className="flex items-baseline gap-2.5 lg:gap-3.5 xl:gap-4 group cursor-pointer"
-            onClick={() => {
-              if (item.label === 'Projects') {
-                router.push('/projects');
-              }
-            }}
+            onClick={() => handleNavClick(item.href, item.label)}
           >
             <span className="text-zinc-600 font-mono text-xs lg:text-sm xl:text-base tracking-tighter group-hover:text-white transition-colors">
               {item.id}
@@ -299,12 +316,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
             <div
               key={item.id}
               className="flex items-baseline gap-3.5 sm:gap-4 group cursor-pointer border-b border-zinc-900 pb-2"
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                if (item.label === 'Projects') {
-                  router.push('/projects');
-                }
-              }}
+              onClick={() => handleNavClick(item.href, item.label)}
             >
               <span className="text-zinc-600 font-mono text-sm sm:text-base tracking-tighter">
                 {item.id}

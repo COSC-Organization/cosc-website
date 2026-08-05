@@ -63,6 +63,10 @@ export default function Header() {
             router.push("/projects");
             return;
         }
+        if (label === "Team" || href === "/team") {
+            router.push("/team");
+            return;
+        }
         if (href.startsWith("/#")) {
             const hash = href.replace("/", "");
             if (pathname === "/") {

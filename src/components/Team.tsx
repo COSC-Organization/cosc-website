@@ -2,8 +2,25 @@
 
 import Image from "next/image";
 import { team } from "@/data/team";
-import { Github, Linkedin } from "lucide-react";
 import { useEffect, useRef } from "react";
+
+function Github({ size = 16, className }: { size?: number; className?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
+    </svg>
+  );
+}
+
+function Linkedin({ size = 16, className }: { size?: number; className?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect x="2" y="9" width="4" height="12" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+}
 
 const frames = ["/team/frame1.webp", "/team/frame2.webp", "/team/frame3.webp"];
 const defaultFramePhotoBox = [
@@ -90,27 +107,27 @@ function SnowParticles() {
 
 function renderMember(member: any, index: number, isLCP: boolean = false) {
   let frameIdx = pattern[index % pattern.length];
-  
+
   let box;
   if (member.customPhotoBox) {
     box = member.customPhotoBox;
   } else {
     box = defaultFramePhotoBox[frameIdx];
   }
-  
+
   return (
     <div key={member.image} className="flex flex-col items-center w-full mx-auto relative z-10">
       <div className="relative w-full aspect-[280/348] max-w-[260px] mx-auto">
         <div className="absolute inset-0 bg-orange-400/30 blur-2xl rounded-full opacity-70 pointer-events-none" />
-        
+
         {/* Photo layer */}
         <div
           className={`absolute overflow-visible ${member.photoInFront ? "z-30" : "z-10"}`}
-          style={{ 
-            top: `calc(${box.top} - 8%)`, 
-            left: `calc(${box.left} - 8%)`, 
-            width: `calc(${box.width} + 16%)`, 
-            height: `calc(${box.height} + 16%)` 
+          style={{
+            top: `calc(${box.top} - 8%)`,
+            left: `calc(${box.left} - 8%)`,
+            width: `calc(${box.width} + 16%)`,
+            height: `calc(${box.height} + 16%)`
           }}
         >
           <div className="relative w-full h-full">
@@ -134,7 +151,7 @@ function renderMember(member: any, index: number, isLCP: boolean = false) {
           loading={isLCP ? "eager" : undefined}
         />
       </div>
-      
+
       <h3 className="mt-3 text-base sm:text-lg md:text-xl font-semibold text-white text-center font-geometric transition-all duration-300 cursor-default">
         {member.name}
       </h3>
@@ -162,7 +179,7 @@ export default function Team() {
     <section className="relative bg-black text-white py-12 sm:py-16 md:py-20 px-4 sm:px-6 overflow-hidden min-h-screen">
       {/* ✅ Snow particles in background */}
       <SnowParticles />
-      
+
       <div className="relative z-10 max-w-4xl mx-auto text-center mb-6 sm:mb-8 md:mb-10">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 font-canela">
           MEET OUR TEAM
@@ -171,7 +188,7 @@ export default function Team() {
           The student leaders and contributors fueling open source collaboration.
         </p>
       </div>
-      
+
       <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-x-8 lg:gap-y-12">
         {team.map((member, index) => renderMember(member, index, index === 0))}
       </div>
