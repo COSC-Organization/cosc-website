@@ -1,4 +1,6 @@
 import SectionTitle from "./SectionTitle";
+import FadeIn from "./FadeIn";
+
 const domains = [
   "Web",
   "AI / ML",
@@ -16,7 +18,8 @@ export default function ContributeSection() {
     <SectionTitle title="CONTRIBUTE" />
     <div className="relative z-10">
  <div className="grid gap-16 lg:grid-cols-2 lg:items-start">
-        <div>
+        <FadeIn>
+            <div>
           
 
           <h2 className="mt-4 font-serif text-4xl uppercase leading-tight sm:text-5xl md:text-6xl">
@@ -33,8 +36,10 @@ export default function ContributeSection() {
             projects, or helping others, there's always a place for you.
           </p>
         </div>
+        </FadeIn>
 
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+        <FadeIn delay={0.15}>
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           {domains.map((domain) => (
             <div
               key={domain}
@@ -44,6 +49,7 @@ export default function ContributeSection() {
             </div>
           ))}
         </div>
+        </FadeIn>
       </div>
     </div>
          

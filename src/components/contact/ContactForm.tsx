@@ -1,4 +1,5 @@
 import SectionTitle from "./SectionTitle";
+import FadeIn from "./FadeIn";
 
 export default function ContactForm() {
   return (
@@ -8,7 +9,8 @@ export default function ContactForm() {
     <div className="relative z-10">
 
           <div className="grid gap-16 lg:grid-cols-2">
-        <div>
+        <FadeIn>
+            <div>
           
 
           <h2 className="mt-4 font-serif text-4xl uppercase leading-tight sm:text-5xl md:text-6xl">
@@ -24,8 +26,10 @@ export default function ContactForm() {
             saying hello—we'd love to hear from you.
           </p>
         </div>
+        </FadeIn>
 
-        <form className="space-y-8">
+       <FadeIn delay={0.2}>
+         <form className="space-y-8">
           <div>
             <label className="mb-3 block text-xs uppercase tracking-[0.3em] text-neutral-500">
               Name
@@ -85,6 +89,7 @@ export default function ContactForm() {
   </span>
 </button>
         </form>
+       </FadeIn>
       </div>
       </div>
     </section>

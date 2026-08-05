@@ -1,9 +1,12 @@
 import HeroIllustration from "./HeroIllustration";
+import FadeIn from "./FadeIn";
 
 export default function ContactHero() {
   return (
     <section className="mx-auto flex min-h-screen w-full max-w-7xl items-center px-5 py-24 sm:px-8 md:px-10 lg:px-12" id = "introduction">
   <div className="grid w-full items-center gap-16 lg:grid-cols-2">
+    
+<FadeIn>
     <div className="max-w-3xl">
       <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-neutral-500 sm:text-xs">
         07
@@ -25,9 +28,12 @@ export default function ContactHero() {
         hosting workshops, or simply saying hello, our doors are always open.
       </p>
     </div>
-
+</FadeIn>
    <div className="hidden lg:flex justify-center">
+    <FadeIn delay={0.2}>
+<div className="animate-[float_6s_ease-in-out_infinite]">
     <HeroIllustration />
+</div></FadeIn>
 </div>
   </div>
 </section>
