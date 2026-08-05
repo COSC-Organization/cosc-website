@@ -151,7 +151,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
     >
       {/* Desktop Top Left Brand (hidden on mobile) */}
       <div className="hidden md:flex md:fixed top-2 left-1 lg:top-3 lg:left-2 xl:top-4 xl:left-3 z-20 items-center gap-1 lg:gap-2">
-        <div className="relative w-28 h-28 lg:w-36 lg:h-36 xl:w-44 xl:h-44 2xl:w-48 2xl:h-48 flex-shrink-0 -translate-y-2 lg:-translate-y-3 xl:-translate-y-4">
+        <div className="relative w-28 h-28 lg:w-36 lg:h-36 xl:w-44 xl:h-44 2xl:w-48 2xl:h-48 flex-shrink-0 -translate-y-3 lg:-translate-y-5 xl:-translate-y-8">
           <Image
             src="/cosc logo.png"
             alt="Canara Open Source Community Logo"
@@ -174,8 +174,8 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
       {/* Desktop Top Right Navigation (hidden on mobile) */}
       <div className="md:fixed top-2 right-4 lg:top-3 lg:right-6 xl:top-4 xl:right-8 2xl:top-6 2xl:right-12 z-20 hidden md:grid grid-cols-2 gap-x-8 gap-y-2 lg:gap-x-12 lg:gap-y-2.5 xl:gap-x-16 xl:gap-y-3">
         {navItems.map((item) => (
-          <div 
-            key={item.id} 
+          <div
+            key={item.id}
             className="flex items-baseline gap-2.5 lg:gap-3.5 xl:gap-4 group cursor-pointer"
             onClick={() => {
               if (item.label === 'Projects') {
