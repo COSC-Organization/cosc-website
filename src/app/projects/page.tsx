@@ -169,7 +169,12 @@ function WireMarquee({ projects }: { projects: Project[] }) {
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      offsetTarget.current += e.deltaY * 1.2;
+      // Maps trackpad horizontal scroll to precise left/right movement
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        offsetTarget.current -= e.deltaX * 1.2;
+      } else {
+        offsetTarget.current -= e.deltaY * 1.2;
+      }
     };
 
     let touchStartX = 0;
@@ -181,8 +186,16 @@ function WireMarquee({ projects }: { projects: Project[] }) {
     const handleTouchMove = (e: TouchEvent) => {
       const x = e.touches[0].clientX;
       const y = e.touches[0].clientY;
-      const delta = (touchStartX - x) + (touchStartY - y);
-      offsetTarget.current += delta * 2.0;
+      const deltaX = touchStartX - x;
+      const deltaY = touchStartY - y;
+      
+      // Makes mobile touch pan left/right cleanly
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        offsetTarget.current -= deltaX * 2.0;
+      } else {
+        offsetTarget.current -= deltaY * 2.0;
+      }
+      
       touchStartX = x;
       touchStartY = y;
     };
@@ -447,7 +460,7 @@ export default function ProjectsPage() {
 
   return (
     <div
-      className="h-screen w-full relative overflow-hidden select-none font-sans flex flex-col justify-center"
+      className="fixed inset-0 w-full overflow-hidden select-none font-sans flex flex-col justify-center"
       style={{ backgroundColor: PAGE_BG, color: INK }}
       onContextMenu={(e) => e.preventDefault()}
     >
@@ -464,7 +477,7 @@ export default function ProjectsPage() {
 
 
       <div
-        className="fixed inset-0 pointer-events-none opacity-[0.05] mix-blend-screen z-0"
+        className="absolute inset-0 pointer-events-none opacity-[0.05] mix-blend-screen z-0"
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E\")",
@@ -473,7 +486,7 @@ export default function ProjectsPage() {
 
       <SceneryBackground />
 
-      <div className="flex-1 w-full max-w-7xl mx-auto pt-0 pb-0 relative z-10 flex flex-col justify-center items-center">
+      <div className="h-full w-full max-w-7xl mx-auto pt-0 pb-0 relative z-10 flex flex-col justify-center items-center">
         
         <DriftingCloud className="top-[-4%] w-10 opacity-10" duration="400s" delay="-0s" />
         <DriftingCloud className="top-[12%] w-12 opacity-[0.08]" duration="400s" delay="-65s" />
@@ -498,7 +511,7 @@ export default function ProjectsPage() {
         <DriftingCloud className="top-[18%] w-28 opacity-70" duration="100s" delay="-75s" />
         <DriftingCloud className="top-[14%] w-44 opacity-50" duration="100s" delay="-90s" />
 
-        <div className="relative text-center -mt-30 sm:-mt-50 -mb-2 sm:-mb-15 overflow-hidden w-full px-4 z-20">
+        <div className="relative text-center -mt-24 sm:-mt-50 -mb-2 sm:-mb-15 overflow-hidden w-full px-4 z-20">
           <h2 className={`${cabinSketch.className} text-2xl sm:text-[2.6rem] mb-0 tracking-wide`} style={{ color: "#EDE6D6" }}>
             OUR PROJECTS
           </h2>
@@ -506,7 +519,7 @@ export default function ProjectsPage() {
 
         <WireMarquee projects={filteredProjects} />
 
-        <div className="absolute bottom-16 sm:bottom-16 left-0 w-full px-2 sm:px-4 z-30 flex flex-col items-center">
+        <div className="absolute bottom-24 sm:bottom-16 left-0 w-full px-2 sm:px-4 z-30 flex flex-col items-center">
           
           <div 
             className="px-3 py-1 sm:px-4 sm:py-1.5 mb-1.5 sm:mb-2 rounded-sm border border-[#EDE6D6]/30 text-center max-w-lg"
