@@ -419,7 +419,9 @@ export default function ProjectsPage() {
 
         if (data.length === 0) return;
 
-        const formattedProjects: Project[] = data.map((repo: GitHubRepo) => {
+        const formattedProjects: Project[] = data
+          .filter((repo: GitHubRepo) => repo.name.toLowerCase() !== ".github")
+          .map((repo: GitHubRepo) => {
           let cat: Project["category"] = "Web Development";
           const topics: string[] = repo.topics || [];
           if (topics.includes("mobile") || topics.includes("flutter") || topics.includes("react-native")) cat = "Mobile Apps";
