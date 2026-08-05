@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { Cabin_Sketch } from "next/font/google";
 import {
   Code2,
@@ -33,6 +31,17 @@ interface Project {
   stars: number;
   githubUrl: string;
   liveUrl: string;
+}
+
+interface GitHubRepo {
+  id: number | string;
+  name: string;
+  description?: string;
+  topics?: string[];
+  forks_count: number;
+  stargazers_count: number;
+  html_url: string;
+  homepage?: string;
 }
 
 // --- Theme Constants ---
@@ -84,7 +93,7 @@ function Clothespin() {
   );
 }
 
-function DriftingCloud({ className, style, duration = "75s", delay = "0s" }: { className?: string; style?: React.CSSProperties; duration?: string; delay?: string }) {
+function DriftingCloud({ className, duration = "75s", delay = "0s" }: { className?: string; style?: React.CSSProperties; duration?: string; delay?: string }) {
   return (
     <div
       className={`absolute pointer-events-none ${className}`}
@@ -94,7 +103,6 @@ function DriftingCloud({ className, style, duration = "75s", delay = "0s" }: { c
         animationTimingFunction: "linear",
         animationIterationCount: "infinite",
         animationDelay: delay,
-        ...style,
       }}
     >
       <svg viewBox="0 0 180 100" className="w-full h-full" fill="none">
@@ -361,7 +369,6 @@ function WireMarquee({ projects }: { projects: Project[] }) {
 }
 
 export default function ProjectsPage() {
-  const router = useRouter();
   const [projectsData, setProjectsData] = useState<Project[]>([]);
   const [activeFilter, setActiveFilter] = useState<(typeof categories)[number]>("All Projects");
 
@@ -380,7 +387,7 @@ export default function ProjectsPage() {
     }
   }, [readyToReveal]);
 
-  // Clean public fetch for GitHub Organization & User repositories without requiring a token
+  // Clean public fetch for GitHub Organization & User repositories with full TypeScript compliance
   useEffect(() => {
     async function fetchGitHubReposAutomatically() {
       try {
@@ -389,7 +396,7 @@ export default function ProjectsPage() {
           "https://api.github.com/users/COSC-Organization/repos?per_page=100"
         ];
 
-        let data: any[] = [];
+        let data: GitHubRepo[] = [];
 
         for (const url of endpoints) {
           try {
@@ -399,20 +406,20 @@ export default function ProjectsPage() {
               }
             });
             if (response.ok) {
-              const result = await response.json();
+              const result = (await response.json()) as GitHubRepo[];
               if (Array.isArray(result) && result.length > 0) {
                 data = result;
                 break;
               }
             }
-          } catch (err) {
-            // Move to next endpoint
+          } catch {
+            // Move to next endpoint silently
           }
         }
 
         if (data.length === 0) return;
 
-        const formattedProjects: Project[] = data.map((repo: any) => {
+        const formattedProjects: Project[] = data.map((repo: GitHubRepo) => {
           let cat: Project["category"] = "Web Development";
           const topics: string[] = repo.topics || [];
           if (topics.includes("mobile") || topics.includes("flutter") || topics.includes("react-native")) cat = "Mobile Apps";
@@ -578,7 +585,7 @@ export default function ProjectsPage() {
                     }}
                     onMouseLeave={(e) => {
                       if (!isActive) {
-                        e.currentTarget.style.borderColor = "rgba(237, 230, 214, c.4)";
+                        e.currentTarget.style.borderColor = "rgba(237, 230, 214, 0.4)";
                         e.currentTarget.style.color = INK_SOFT;
                       }
                     }}
