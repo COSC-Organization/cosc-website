@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import VideoWithPoster from './VideoWithPoster';
 
 const navItems = [
@@ -17,6 +18,7 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ isAnimationComplete = true }: HeroSectionProps) {
+  const router = useRouter();
   const sectionRef = React.useRef<HTMLDivElement>(null);
   const [showScrollPrompt, setShowScrollPrompt] = React.useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -172,7 +174,15 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
       {/* Desktop Top Right Navigation (hidden on mobile) */}
       <div className="md:fixed top-2 right-4 lg:top-3 lg:right-6 xl:top-4 xl:right-8 2xl:top-6 2xl:right-12 z-20 hidden md:grid grid-cols-2 gap-x-8 gap-y-2 lg:gap-x-12 lg:gap-y-2.5 xl:gap-x-16 xl:gap-y-3">
         {navItems.map((item) => (
-          <div key={item.id} className="flex items-baseline gap-2.5 lg:gap-3.5 xl:gap-4 group cursor-pointer">
+          <div 
+            key={item.id} 
+            className="flex items-baseline gap-2.5 lg:gap-3.5 xl:gap-4 group cursor-pointer"
+            onClick={() => {
+              if (item.label === 'Projects') {
+                router.push('/projects');
+              }
+            }}
+          >
             <span className="text-zinc-600 font-mono text-xs lg:text-sm xl:text-base tracking-tighter group-hover:text-white transition-colors">
               {item.id}
             </span>
@@ -262,7 +272,12 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
             <div
               key={item.id}
               className="flex items-baseline gap-3.5 sm:gap-4 group cursor-pointer border-b border-zinc-900 pb-2"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                if (item.label === 'Projects') {
+                  router.push('/projects');
+                }
+              }}
             >
               <span className="text-zinc-600 font-mono text-sm sm:text-base tracking-tighter">
                 {item.id}

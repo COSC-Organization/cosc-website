@@ -113,6 +113,7 @@ export default function Home() {
       {/* Main Content */}
       <main className="flex flex-1 flex-col">
         <HeroSection isAnimationComplete={isAnimationComplete} />
+        
       </main>
     </div>
   );
