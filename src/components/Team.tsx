@@ -11,7 +11,7 @@ const defaultFramePhotoBox = [
   { top: "19%", left: "17%", width: "66%", height: "72%" },
   { top: "32%", left: "24%", width: "54%", height: "60%" },
 ];
-const pattern = [0, 2, 1, 1, 0, 2, 0, 1, 0, 0, 2, 1, 2];
+const pattern = [0, 2, 1, 1, 0, 2, 0, 1, 0, 2, 0, 1, 2];
 
 function getFrameIndex(index: number) {
   return pattern[index % pattern.length];
