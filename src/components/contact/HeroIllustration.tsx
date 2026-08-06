@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function HeroIllustration() {
   return (
     <div className="relative mx-auto w-full max-w-xl">

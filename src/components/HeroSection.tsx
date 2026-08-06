@@ -2,7 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import VideoWithPoster from './VideoWithPoster';
-import Link from "next/link";
 
 const navItems = [
   { id: '01', label: 'About Us', href: '/#about' },
@@ -11,7 +10,7 @@ const navItems = [
   { id: '04', label: 'Projects', href: '/projects' },
   { id: '05', label: 'Workshops', href: '/workshops' },
   { id: '06', label: 'Team', href: '/team' },
-  { id: '07', label: 'Get In Touch', href: '/#contact' },
+  { id: '07', label: 'Get In Touch', href: '/get-in-touch' },
 ];
 
 interface HeroSectionProps {
@@ -23,20 +22,9 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
   const sectionRef = React.useRef<HTMLDivElement>(null);
   const [showScrollPrompt, setShowScrollPrompt] = React.useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  const [responsiveScale, setResponsiveScale] = React.useState(1);
-  const [isMounted, setIsMounted] = React.useState(false);
 
   React.useEffect(() => {
-    setIsMounted(true);
     const updateScaleAndCenter = () => {
-      if (window.innerWidth < 768) {
-        // Mobile view (< 768px): proportional height scale for mobile phone screens
-        const computedScale = Math.min(1, Math.max(0.55, window.innerHeight / 900));
-        setResponsiveScale(computedScale);
-      } else {
-        // In-between (768px-1439px) & Desktop (1440px+): scale 1.0 (constant scene)
-        setResponsiveScale(1);
-      }
 
       if (sectionRef.current) {
         const scrollWidth = sectionRef.current.scrollWidth;
@@ -223,73 +211,20 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
       {/* Desktop Top Right Navigation (hidden on mobile) */}
       <div className="md:fixed top-2 right-4 lg:top-3 lg:right-6 xl:top-4 xl:right-8 2xl:top-6 2xl:right-12 z-20 hidden md:grid grid-cols-2 gap-x-8 gap-y-2 lg:gap-x-12 lg:gap-y-2.5 xl:gap-x-16 xl:gap-y-3">
 
-        {navItems.map((item) =>
-  item.label === "Get In Touch" ? (
-    <Link
-      key={item.id}
-      href="/get-in-touch"
-      className="flex items-baseline gap-2.5 lg:gap-3.5 xl:gap-4 group"
-    >
-      <span className="text-zinc-600 font-mono text-xs lg:text-sm xl:text-base tracking-tighter group-hover:text-white transition-colors">
-        {item.id}
-      </span>
-
-      <span className="text-zinc-300 text-[11px] lg:text-xs xl:text-sm font-geometric font-medium tracking-[0.15em] lg:tracking-[0.18em] xl:tracking-[0.2em] uppercase group-hover:text-white transition-colors">
-        {item.label}
-      </span>
-    </Link>
-  ) : (
-    <div
-      key={item.id}
-      className="flex items-baseline gap-2.5 lg:gap-3.5 xl:gap-4 group cursor-pointer"
-      onClick={() => handleNavClick(item.href, item.label)}
-    >
-      <span className="text-zinc-600 font-mono text-xs lg:text-sm xl:text-base tracking-tighter group-hover:text-white transition-colors">
-        {item.id}
-      </span>
-
-      <span className="text-zinc-300 text-[11px] lg:text-xs xl:text-sm font-geometric font-medium tracking-[0.15em] lg:tracking-[0.18em] xl:tracking-[0.2em] uppercase group-hover:text-white transition-colors">
-        {item.label}
-      </span>
-    </div>
-  )
-)}
-
-{navItems.map((item) =>
-          item.label === "Get In Touch" ? (
-            <Link
-              key={item.id}
-              href="/get-in-touch"
-              className="flex items-baseline gap-2.5 lg:gap-3.5 xl:gap-4 group"
-            >
-              <span className="text-zinc-600 font-mono text-xs lg:text-sm xl:text-base tracking-tighter group-hover:text-white transition-colors">
-                {item.id}
-              </span>
-
-              <span className="text-zinc-300 text-[11px] lg:text-xs xl:text-sm font-geometric font-medium tracking-[0.15em] lg:tracking-[0.18em] xl:tracking-[0.2em] uppercase group-hover:text-white transition-colors">
-                {item.label}
-              </span>
-            </Link>
-          ) : (
-            <div
-              key={item.id}
-              className="flex items-baseline gap-2.5 lg:gap-3.5 xl:gap-4 group cursor-pointer"
-              onClick={() => {
-                if (item.label === 'Projects') {
-                  router.push('/projects');
-                }
-              }}
-            >
-              <span className="text-zinc-600 font-mono text-xs lg:text-sm xl:text-base tracking-tighter group-hover:text-white transition-colors">
-                {item.id}
-              </span>
-              <span className="text-zinc-300 text-[11px] lg:text-xs xl:text-sm font-geometric font-medium tracking-[0.15em] lg:tracking-[0.18em] xl:tracking-[0.2em] uppercase group-hover:text-white transition-colors">
-                {item.label}
-              </span>
-            </div>
-          )
-        )}
-
+       {navItems.map((item) => (
+          <div
+            key={item.id}
+            className="flex items-baseline gap-2.5 lg:gap-3.5 xl:gap-4 group cursor-pointer"
+            onClick={() => handleNavClick(item.href, item.label)}
+          >
+            <span className="text-zinc-600 font-mono text-xs lg:text-sm xl:text-base tracking-tighter group-hover:text-white transition-colors">
+              {item.id}
+            </span>
+            <span className="text-zinc-300 text-[11px] lg:text-xs xl:text-sm font-geometric font-medium tracking-[0.15em] lg:tracking-[0.18em] xl:tracking-[0.2em] uppercase group-hover:text-white transition-colors">
+              {item.label}
+            </span>
+          </div>
+        ))}
       </div>
 
       {/* Mobile Header (hidden on desktop) */}
@@ -367,38 +302,20 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
 
         {/* Menu Navigation Links */}
         <div className="flex flex-col gap-3.5 sm:gap-5 my-auto">
-{navItems.map((item) =>
-  item.label === "Get In Touch" ? (
-    <Link
-      key={item.id}
-      href="/get-in-touch"
-      onClick={() => setIsMobileMenuOpen(false)}
-      className="flex items-baseline gap-3.5 sm:gap-4 border-b border-zinc-900 pb-2"
-    >
-      <span className="text-zinc-600 font-mono text-sm sm:text-base tracking-tighter">
-        {item.id}
-      </span>
-
-      <span className="text-zinc-200 text-lg sm:text-xl font-geometric font-medium tracking-[0.12em] sm:tracking-[0.15em] uppercase hover:text-white transition-colors">
-        {item.label}
-      </span>
-    </Link>
-  ) : (
-    <div
-      key={item.id}
-      className="flex items-baseline gap-3.5 sm:gap-4 group cursor-pointer border-b border-zinc-900 pb-2"
-      onClick={() => handleNavClick(item.href, item.label)}
-    >
-      <span className="text-zinc-600 font-mono text-sm sm:text-base tracking-tighter">
-        {item.id}
-      </span>
-
-      <span className="text-zinc-200 text-lg sm:text-xl font-geometric font-medium tracking-[0.12em] sm:tracking-[0.15em] uppercase group-hover:text-white transition-colors">
-        {item.label}
-      </span>
-    </div>
-  )
-)}
+ {navItems.map((item) => (
+            <div
+              key={item.id}
+              className="flex items-baseline gap-3.5 sm:gap-4 group cursor-pointer border-b border-zinc-900 pb-2"
+              onClick={() => handleNavClick(item.href, item.label)}
+            >
+              <span className="text-zinc-600 font-mono text-sm sm:text-base tracking-tighter">
+                {item.id}
+              </span>
+              <span className="text-zinc-200 text-lg sm:text-xl font-geometric font-medium tracking-[0.12em] sm:tracking-[0.15em] uppercase group-hover:text-white transition-colors">
+                {item.label}
+              </span>
+            </div>
+          ))}
         </div>
 
         {/* Footer Tagline in mobile drawer */}
