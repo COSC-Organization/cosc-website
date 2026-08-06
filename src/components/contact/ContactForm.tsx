@@ -29,17 +29,23 @@ export default function ContactForm() {
         </FadeIn>
 
        <FadeIn delay={0.2}>
-         <form className="space-y-8">
+         <form
+  action="https://formspree.io/f/xvkpolrr"
+  method="POST"
+  className="space-y-8"
+>
           <div>
             <label className="mb-3 block text-xs uppercase tracking-[0.3em] text-neutral-500">
               Name
             </label>
 
-            <input
-              type="text"
-              placeholder="Your name"
-              className="w-full border-b border-neutral-700 bg-transparent py-4 text-lg outline-none transition focus:border-[#D89A3D]"
-            />
+           <input
+  type="text"
+  name="name"
+  placeholder="Your name"
+  required
+  className="w-full border-b border-neutral-700 bg-transparent py-4 text-lg outline-none transition focus:border-[#D89A3D]"
+/>
           </div>
 
           <div>
@@ -48,10 +54,12 @@ export default function ContactForm() {
             </label>
 
             <input
-              type="email"
-              placeholder="you@example.com"
-              className="w-full border-b border-neutral-700 bg-transparent py-4 text-lg outline-none transition focus:border-[#D89A3D]"
-            />
+  type="email"
+  name="email"
+  placeholder="you@example.com"
+  required
+  className="w-full border-b border-neutral-700 bg-transparent py-4 text-lg outline-none transition focus:border-[#D89A3D]"
+/>
           </div>
 
           <div>
@@ -60,10 +68,11 @@ export default function ContactForm() {
             </label>
 
             <input
-              type="text"
-              placeholder="What's this about?"
-              className="w-full border-b border-neutral-700 bg-transparent py-4 text-lg outline-none transition focus:border-[#D89A3D]"
-            />
+  type="text"
+  name="subject"
+  placeholder="What's this about?"
+  className="w-full border-b border-neutral-700 bg-transparent py-4 text-lg outline-none transition focus:border-[#D89A3D]"
+/>
           </div>
 
           <div>
@@ -72,12 +81,28 @@ export default function ContactForm() {
             </label>
 
             <textarea
-              rows={6}
-              placeholder="Tell us about your idea..."
-              className="w-full resize-none border-b border-neutral-700 bg-transparent py-4 text-lg outline-none transition focus:border-[#D89A3D]"
-            />
+  rows={6}
+  name="message"
+  placeholder="Tell us about your idea..."
+  required
+  className="w-full resize-none border-b border-neutral-700 bg-transparent py-4 text-lg outline-none transition focus:border-[#D89A3D]"
+/>
           </div>
+<input
+  type="hidden"
+  name="_subject"
+  value="New message from COSC Website"
+/>
 
+<input
+  type="hidden"
+  name="_captcha"
+  value="false"
+/>
+<input
+  type="hidden"
+  value="https://cosc25.in/get-in-touch?success=true"
+/>
           <button
   type="submit"
   className="group mt-4 inline-flex w-full items-center justify-center border border-[#D89A3D] px-8 py-4 text-xs uppercase tracking-[0.3em] transition-all duration-300 hover:bg-[#D89A3D] hover:text-black hover:shadow-[0_0_35px_rgba(216,154,61,0.2)] sm:w-auto"

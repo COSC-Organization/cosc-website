@@ -40,7 +40,7 @@ export default function Header() {
     }, [isMobileMenuOpen]);
 
     // Hide Header on HeroSection (Home page '/')
-    if (pathname === "/") {
+    if (pathname === "/" || pathname === "/get-in-touch") {
         return null;
     }
 
