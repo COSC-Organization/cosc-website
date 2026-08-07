@@ -22,8 +22,21 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
   const sectionRef = React.useRef<HTMLDivElement>(null);
   const [showScrollPrompt, setShowScrollPrompt] = React.useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [responsiveScale, setResponsiveScale] = React.useState(1);
+  const [isMounted, setIsMounted] = React.useState(false);
+
   React.useEffect(() => {
+    setIsMounted(true);
     const updateScaleAndCenter = () => {
+      if (window.innerWidth < 768) {
+        // Mobile view (< 768px): proportional height scale for mobile phone screens
+        const computedScale = Math.min(1, Math.max(0.55, window.innerHeight / 900));
+        setResponsiveScale(computedScale);
+      } else {
+        // In-between (768px-1439px) & Desktop (1440px+): scale 1.0 (constant scene)
+        setResponsiveScale(1);
+      }
+
       if (sectionRef.current) {
         const scrollWidth = sectionRef.current.scrollWidth;
         const clientWidth = sectionRef.current.clientWidth;

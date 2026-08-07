@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { team, type TeamMember } from "@/data/team";
+import { team } from "@/data/team";
 import { useEffect, useRef } from "react";
 
 function Github({ size = 16, className }: { size?: number; className?: string }) {
@@ -105,8 +105,8 @@ function SnowParticles() {
   );
 }
 
-function renderMember(member: TeamMember, index: number, isLCP: boolean = false) {
-  const frameIdx = getFrameIndex(index);
+function renderMember(member: any, index: number, isLCP: boolean = false) {
+  let frameIdx = pattern[index % pattern.length];
 
   let box;
   if (member.customPhotoBox) {

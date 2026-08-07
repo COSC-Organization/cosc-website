@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Pages
+name: Deploy to Vercel
 
 on:
   pull_request:
@@ -7,9 +7,9 @@ on:
     branches: [main, master]
   workflow_dispatch:
 
-concurrency:
-  group: cf-pages-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 jobs:
   deploy:
@@ -17,7 +17,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-      deployments: write
+      deployments: write 
 
     steps:
       - name: Checkout code
@@ -31,8 +31,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
-          cache: 'pnpm'
+          node-version: "20.x"
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -45,47 +45,41 @@ jobs:
           token: '${{ github.token }}'
           environment: ${{ github.event_name == 'pull_request' && 'preview' || 'production' }}
 
-      - name: Build static site
-        run: pnpm build
-        timeout-minutes: 10
-
-      - name: Deploy to Cloudflare Pages
-        id: cf_deploy
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: >-
-            pages deploy out
-            --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME }}
-            --branch=${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
-
-      # `deployment-url` can arrive without a scheme or with a trailing
-      # "(custom domain)" suffix, so pull the URL out of the raw command
-      # output first and fall back to the structured output.
-      - name: Resolve deployment URL
-        id: url
-        env:
-          RAW_OUTPUT: ${{ steps.cf_deploy.outputs.command-output }}
-          FALLBACK: ${{ steps.cf_deploy.outputs.deployment-url }}
+      - name: Pull Vercel Environment
         run: |
-          url=$(printf '%s' "$RAW_OUTPUT" \
-            | grep -oE 'https://[A-Za-z0-9._-]+\.pages\.dev' \
-            | tail -n 1)
-          if [[ -z "$url" && -n "$FALLBACK" ]]; then
-            url=$(printf '%s' "$FALLBACK" | grep -oE '[A-Za-z0-9._-]+\.pages\.dev' | tail -n 1)
-            [[ -n "$url" ]] && url="https://$url"
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            npx vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            npx vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
           fi
-          echo "value=$url" >> "$GITHUB_OUTPUT"
 
+      # --- STEP 3: BUILD PROJECT ---
+      - name: Build Project Artifacts
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            npx vercel build --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            npx vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+          fi
+          
+      - name: Deploy to Vercel
+        id: vercel_deploy
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            url=$(npx vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          else
+            url=$(npx vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
+          fi
+          echo "DEPLOY_URL=$url" >> "$GITHUB_OUTPUT"
+      
       - name: Update GitHub Deployment Status
         if: success()
         uses: chrnorm/deployment-status@v2
         with:
           token: '${{ github.token }}'
-          environment-url: ${{ steps.url.outputs.value }}
+          environment-url: ${{ steps.vercel_deploy.outputs.DEPLOY_URL }}
           state: 'success'
-          description: 'Cloudflare Pages deployment is live!'
+          description: 'Vercel Deployment is live!'
           deployment-id: ${{ steps.deployment.outputs.deployment_id }}
 
       - name: Update GitHub Deployment Failure
@@ -101,12 +95,12 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const url = '${{ steps.url.outputs.value }}';
+            const url = '${{ steps.vercel_deploy.outputs.DEPLOY_URL }}';
             github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `Cloudflare Pages preview ready!\n\n[View Deployment](${url})`
+              body: `Vercel Preview ready!\n\n[View Deployment](${url})`
             });
 
       - name: Summary
@@ -114,4 +108,4 @@ jobs:
         run: |
           echo "Deployment Summary" >> $GITHUB_STEP_SUMMARY
           echo "Event: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "URL: ${{ steps.url.outputs.value }}" >> $GITHUB_STEP_SUMMARY
+          echo "URL: ${{ steps.vercel_deploy.outputs.DEPLOY_URL }}" >> $GITHUB_STEP_SUMMARY
