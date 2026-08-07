@@ -14,9 +14,6 @@ import {
   Star,
 } from "lucide-react";
 
-// --- Core Components & Hooks ---
-import { useAssetPreloader } from '@/hooks/useAssetPreloader';
-
 // --- Font Setup ---
 const cabinSketch = Cabin_Sketch({ subsets: ["latin"], weight: ["400", "700"] });
 
