@@ -13,13 +13,13 @@ export interface NavItem {
 
 export const navItems: NavItem[] = [
     { id: "00", label: "Home", href: "/" },
-    { id: "01", label: "About Us", href: "/#about" },
+    { id: "01", label: "About Us", href: "/about" },
     { id: "02", label: "Blogs", href: "/blogs" },
     { id: "03", label: "Events", href: "/events" },
     { id: "04", label: "Projects", href: "/projects" },
     { id: "05", label: "Workshops", href: "/workshops" },
     { id: "06", label: "Team", href: "/team" },
-    { id: "07", label: "Get In Touch", href: "/#contact" },
+    { id: "07", label: "Get In Touch", href: "/get-in-touch" },
 ];
 
 export default function Header() {
