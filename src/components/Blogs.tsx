@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { blogs, type BlogPost } from "@/data/blogs";
 
-// Reuses the same ambient particle effect used on the Team page
 function AmbientParticles() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
