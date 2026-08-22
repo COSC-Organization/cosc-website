@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap');
 @import 'tailwindcss';
 
 @font-face {
@@ -28,6 +29,7 @@
   --font-mono: var(--font-geist-mono);
   --font-cormorant: var(--font-cormorant);
   --font-canela: 'Canela', serif;
+  --font-caveat: 'Caveat', cursive;
   --font-geometric: 'Outfit', sans-serif;
 }
 
@@ -63,13 +65,94 @@ body {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 /* Chromatic aberration style text shadow */
 .chromatic-text {
-  text-shadow: 
-    -1.5px -0.5px 0px rgba(0, 240, 255, 0.8), 
+  text-shadow:
+    -1.5px -0.5px 0px rgba(0, 240, 255, 0.8),
     1.5px 0.5px 0px rgba(255, 80, 0, 0.8);
+}
+
+/* Realistic Vintage Parchment Page Texture System */
+.parchment-bg {
+  background-color: #F3E6CC;
+  background-image:
+    radial-gradient(circle at 50% 50%, #FFF9E9 0%, #F6EBD3 55%, #E8D5AD 100%),
+    radial-gradient(circle at 10% 15%, rgba(255, 249, 233, 0.5) 0%, transparent 40%),
+    radial-gradient(circle at 90% 85%, rgba(232, 213, 173, 0.5) 0%, transparent 45%);
+  position: relative;
+}
+
+/* SVG Micro-grain Paper Texture Overlay */
+.parchment-texture {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.25;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 0.28 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperNoise)'/%3E%3C/svg%3E");
+  z-index: 1;
+}
+
+/* Page inner vignette & spine crease shadows */
+.parchment-page-left {
+  box-shadow:
+    inset -14px 0 22px -8px rgba(100, 75, 40, 0.28),
+    /* Book spine crease on right */
+    inset 0 0 25px rgba(180, 150, 100, 0.14),
+    /* Outer edge aging vignette */
+    0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.parchment-page-right {
+  box-shadow:
+    inset 14px 0 22px -8px rgba(100, 75, 40, 0.28),
+    /* Book spine crease on left */
+    inset 0 0 25px rgba(180, 150, 100, 0.14),
+    /* Outer edge aging vignette */
+    0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Vintage Paper Frame Border */
+.parchment-frame {
+  position: absolute;
+  inset: 10px;
+  border: 1.5px solid #CDB98E;
+  pointer-events: none;
+  z-index: 2;
+  border-radius: 2px;
+  opacity: 0.85;
+}
+
+.parchment-frame-inner {
+  position: absolute;
+  inset: 13px;
+  border: 0.5px solid #CDB98E;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.6;
+}
+
+/* Custom scrollbar for parchment pages */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(105, 60, 20, 0.08);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(105, 60, 20, 0.28);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(105, 60, 20, 0.45);
 }

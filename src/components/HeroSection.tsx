@@ -45,6 +45,9 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
   React.useEffect(() => {
     if (!isAnimationComplete) return;
 
+    // Prefetch the blogs route so navigation is instant
+    router.prefetch('/blogs');
+
     // Hide prompt immediately if user scrolls horizontally
     const handleScroll = () => {
       if (sectionRef.current) {
@@ -70,7 +73,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         container.removeEventListener('scroll', handleScroll);
       }
     };
-  }, [isAnimationComplete]);
+  }, [isAnimationComplete, router]);
 
   // Convert vertical scroll gestures to horizontal scroll in responsive view (< 1440px)
   React.useEffect(() => {
