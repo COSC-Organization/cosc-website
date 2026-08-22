@@ -1,3 +1,5 @@
+/// <reference lib="dom" />
+
 declare module "page-flip" {
   export interface PageFlipOptions {
     width?: number;
@@ -25,7 +27,7 @@ declare module "page-flip" {
 
   export class PageFlip {
     constructor(element: HTMLElement, options: PageFlipOptions);
-    loadFromHTML(items: NodeListOf<HTMLElement> | HTMLElement[]): void;
+    loadFromHTML(items: HTMLElement[] | ArrayLike<HTMLElement>): void;
     loadFromImages(images: string[]): void;
     destroy(): void;
     flip(pageIndex: number, corner?: "top" | "bottom"): void;
