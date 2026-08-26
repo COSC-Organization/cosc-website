@@ -58,6 +58,10 @@ export default function Header() {
             router.push("/team");
             return;
         }
+        if (label === "Get In Touch" || href === "/get-in-touch") {
+            router.push("/get-in-touch");
+            return;
+        }
         if (href.startsWith("/#")) {
             const hash = href.replace("/", "");
             if (pathname === "/") {
