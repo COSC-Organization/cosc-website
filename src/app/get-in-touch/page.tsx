@@ -92,11 +92,8 @@ export default function GetInTouchPage() {
       </div>
 
       {/* --- MIDDLE & BOTTOM CONTENT CONTAINER --- */}
-      <main className="relative z-10 flex-1 flex flex-col justify-between w-full max-w-7xl mx-auto px-4 sm:px-8 pt-20 sm:pt-24 pb-2 overflow-hidden">
-        
-        {/* --- CENTER BOARD IMAGE (board.png) --- */}
-        <div className="relative z-10 w-full max-w-[720px] mx-auto my-auto mt-6 sm:mt-10 translate-y-4 sm:translate-y-8 aspect-[1000/667] flex items-center justify-center drop-shadow-[0_15px_35px_rgba(0,0,0,0.65)]">
-          {/* Board Image */}
+      <main className="relative z-10 flex-1 flex flex-col justify-between w-full max-w-7xl mx-auto px-2 sm:px-6 pt-12 sm:pt-16 lg:pt-24 pb-1 sm:pb-3 overflow-hidden">
+          <div className="relative z-10 w-full max-w-[720px] mx-auto my-auto mt-6 sm:mt-10 translate-y-4 sm:translate-y-8 aspect-[1536/1024] hidden md:flex items-center justify-center drop-shadow-[0_15px_35px_rgba(0,0,0,0.65)] shrink-0">
           <Image
             src="/contact/board.png"
             alt="Contact Board Frame"
@@ -115,10 +112,10 @@ export default function GetInTouchPage() {
           </div>
 
           {/* Content Container Overlay Inside Board Parchment */}
-          <div className="absolute inset-[11%_5%_5%_5%] z-20 grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-5 items-stretch p-2 sm:p-4">
+          <div className="absolute inset-[11%_5%_5%_5%] z-20 grid grid-cols-12 gap-3 md:gap-5 items-stretch p-2 sm:p-4">
             
             {/* LEFT COLUMN: LET'S CONNECT */}
-            <div className="md:col-span-5 flex flex-col justify-between md:pr-3 md:border-r-2 md:border-dashed md:border-[#C4B293]/60">
+            <div className="col-span-5 flex flex-col justify-between pr-3 border-r-2 border-dashed border-[#C4B293]/60">
               <div>
                 <div className="flex items-center gap-1.5 mb-2 text-[#2E1F12]">
                   <div className="p-1 rounded bg-[#3D2714] text-[#EDE2C8]">
@@ -177,7 +174,7 @@ export default function GetInTouchPage() {
             </div>
 
             {/* RIGHT COLUMN: SEND US A MESSAGE */}
-            <div className="md:col-span-7 flex flex-col justify-between">
+            <div className="col-span-7 flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-1.5 mb-2 text-[#2E1F12]">
                   <div className="p-1 rounded bg-[#3D2714] text-[#EDE2C8]">
@@ -277,32 +274,218 @@ export default function GetInTouchPage() {
           </div>
         </div>
 
+        {/* ========================================================================= */}
+        {/* MOBILE BOARD CONTAINER (image.png - Vertical Portrait 941x1672) - md:hidden */}
+        {/* ========================================================================= */}
+        <div className="relative z-10 w-[88vw] max-w-[350px] aspect-[941/1672] mx-auto my-auto flex md:hidden items-center justify-center drop-shadow-[0_15px_35px_rgba(0,0,0,0.65)] shrink-0">
+          <Image
+            src="/contact/image.png"
+            alt="Mobile Contact Board Frame"
+            fill
+            priority
+            quality={100}
+            sizes="88vw"
+            className="object-contain"
+          />
+
+          {/* Top Wooden Banner Text on Mobile */}
+          <div className="absolute top-[2.8%] left-1/2 -translate-x-1/2 z-20 text-center w-[50%] flex flex-col items-center justify-center">
+            <span className="text-[9px] sm:text-[10px] font-bold text-[#2C1D0F] tracking-wide leading-tight drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)]">
+              We'd love to<br />hear from you!
+            </span>
+          </div>
+
+          {/* Vertical Parchment Content Overlay on Mobile */}
+          <div className="absolute inset-[13.5%_18.5%_9.5%_18.5%] z-20 flex flex-col justify-between py-1 text-[#2C1D0F]">
+            
+            {/* 1. TOP SECTION: LET'S CONNECT INTRO */}
+            <div>
+              <div className="flex items-center gap-1 mb-0.5 text-[#2E1F12]">
+                <div className="p-1 rounded bg-[#3D2714] text-[#EDE2C8]">
+                  <MessageSquare className="w-2.5 h-2.5 fill-current" />
+                </div>
+                <h2 className="text-[10px] font-bold tracking-wider uppercase">
+                  LET'S CONNECT
+                </h2>
+              </div>
+
+              <p className="text-[8px] font-medium text-[#4A3B2C] leading-tight">
+                Have a question, suggestion, or partnership idea? Reach out to us and we'll get back to you as soon as possible!
+              </p>
+            </div>
+
+            <div className="w-full border-b border-dashed border-[#C4B293]/70 my-0.5" />
+
+            {/* 2. MIDDLE SECTION: SEND US A MESSAGE FORM */}
+            <div className="space-y-1">
+              <div className="flex items-center gap-1 mb-0.5 text-[#2E1F12]">
+                <div className="p-1 rounded bg-[#3D2714] text-[#EDE2C8]">
+                  <Pencil className="w-2.5 h-2.5" />
+                </div>
+                <h2 className="text-[10px] font-bold tracking-wider uppercase">
+                  SEND US A MESSAGE
+                </h2>
+              </div>
+
+              {submitted ? (
+                <div className="py-3 flex flex-col items-center justify-center text-center space-y-1 bg-[#E2D3B6]/90 rounded-lg border border-[#C9B99A] p-2">
+                  <CheckCircle2 className="w-5 h-5 text-[#8B3A13] animate-bounce" />
+                  <h3 className="text-[9.5px] font-bold text-[#2C1D0F]">Message Received!</h3>
+                  <p className="text-[8px] font-medium text-[#4A3B2C]">
+                    Thank you for reaching out. We will get back to you as soon as possible!
+                  </p>
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="mt-1 px-2 py-0.5 rounded bg-[#A2481A] text-white font-bold text-[8px] uppercase border border-[#5E2408] cursor-pointer"
+                  >
+                    Send Another Message
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-1">
+                  <div>
+                    <label className="block text-[7.5px] font-bold text-[#2C1D0F] uppercase tracking-wider mb-0.5">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Enter your name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full px-1.5 py-0.5 rounded bg-[#DFD1B4]/90 border border-[#AF9F82] text-[#2C1D0F] placeholder-[#8C7B61] text-[8px] font-medium focus:outline-none focus:border-[#7A4B20]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[7.5px] font-bold text-[#2C1D0F] uppercase tracking-wider mb-0.5">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="Enter your email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full px-1.5 py-0.5 rounded bg-[#DFD1B4]/90 border border-[#AF9F82] text-[#2C1D0F] placeholder-[#8C7B61] text-[8px] font-medium focus:outline-none focus:border-[#7A4B20]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[7.5px] font-bold text-[#2C1D0F] uppercase tracking-wider mb-0.5">
+                      Subject
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="What's this about?"
+                      value={formData.subject}
+                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      className="w-full px-1.5 py-0.5 rounded bg-[#DFD1B4]/90 border border-[#AF9F82] text-[#2C1D0F] placeholder-[#8C7B61] text-[8px] font-medium focus:outline-none focus:border-[#7A4B20]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[7.5px] font-bold text-[#2C1D0F] uppercase tracking-wider mb-0.5">
+                      Message
+                    </label>
+                    <textarea
+                      required
+                      rows={2}
+                      placeholder="Type your message here..."
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full px-1.5 py-0.5 rounded bg-[#DFD1B4]/90 border border-[#AF9F82] text-[#2C1D0F] placeholder-[#8C7B61] text-[8px] font-medium focus:outline-none focus:border-[#7A4B20] resize-none"
+                    />
+                  </div>
+
+                  <div className="pt-0.5 flex justify-center">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="px-4 py-1 rounded-lg bg-[#A2481A] hover:bg-[#B8531F] text-white font-bold text-[8.5px] uppercase border-2 border-[#5E2408] shadow-[0_2px_0_#5E2408] flex items-center justify-center gap-1 transition-all cursor-pointer disabled:opacity-50"
+                    >
+                      <Send className="w-2.5 h-2.5 fill-current" />
+                      <span>{isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}</span>
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+
+            <div className="w-full border-b border-dashed border-[#C4B293]/70 my-0.5" />
+
+            {/* 3. BOTTOM SECTION: CONTACT INFO BOXES */}
+            <div className="space-y-1">
+              {/* Email */}
+              <div className="p-1 rounded-lg border border-[#C9B99A] flex items-center gap-1.5 bg-[#E2D3B6]/80">
+                <div className="p-0.5 rounded bg-[#A2481A] text-white shrink-0">
+                  <Mail className="w-2.5 h-2.5" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-[7.5px] font-bold text-[#2A1D11] uppercase tracking-wider leading-none">Email</h3>
+                  <p className="text-[8px] font-bold text-[#3D2D1E] truncate leading-tight">
+                    cosc@canaraengineering.in
+                  </p>
+                </div>
+              </div>
+
+              {/* Location */}
+              <div className="p-1 rounded-lg border border-[#C9B99A] flex items-center gap-1.5 bg-[#E2D3B6]/80">
+                <div className="p-0.5 rounded bg-[#A2481A] text-white shrink-0">
+                  <MapPin className="w-2.5 h-2.5" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-[7.5px] font-bold text-[#2A1D11] uppercase tracking-wider leading-none">Location</h3>
+                  <p className="text-[8px] font-semibold text-[#3D2D1E] truncate leading-tight">
+                    Canara Engg College, Mangalore
+                  </p>
+                </div>
+              </div>
+
+              {/* Response Time */}
+              <div className="p-1 rounded-lg border border-[#C9B99A] flex items-center gap-1.5 bg-[#E2D3B6]/80">
+                <div className="p-0.5 rounded bg-[#A2481A] text-white shrink-0">
+                  <Clock className="w-2.5 h-2.5" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-[7.5px] font-bold text-[#2A1D11] uppercase tracking-wider leading-none">Response Time</h3>
+                  <p className="text-[8px] font-semibold text-[#3D2D1E] truncate leading-tight">
+                    Reply within 24-48 hours
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
         {/* --- BOTTOM FLOATING BOARDS: LEFT (board2.png) & RIGHT (plant.png + board3.png) --- */}
-        <div className="w-full flex justify-between items-end pb-12 sm:pb-20 -translate-y-10 sm:-translate-y-16 pointer-events-none z-30">
+        <div className="w-full max-w-[820px] md:max-w-none mx-auto flex justify-between items-end pb-1 sm:pb-4 md:pb-8 pointer-events-none z-30 shrink-0 px-2 sm:px-4 md:px-12 -translate-y-16 sm:-translate-y-20 md:-translate-y-14">
           
           {/* BOTTOM LEFT: BOARD 2 */}
-          <div className="relative w-24 sm:w-30 lg:w-34 aspect-[600/900] drop-shadow-[0_10px_25px_rgba(0,0,0,0.6)] pointer-events-auto translate-x-12 sm:translate-x-20 -translate-y-6 sm:-translate-y-12">
+          <div className="relative w-26 sm:w-36 lg:w-34 aspect-[600/900] drop-shadow-[0_10px_25px_rgba(0,0,0,0.6)] pointer-events-auto translate-x-1 sm:translate-x-4 md:translate-x-16 lg:translate-x-20 md:-translate-y-6">
             <Image
               src="/contact/board2.png"
               alt="Reach Us On Board"
               fill
               priority
               quality={100}
-              sizes="(max-width: 640px) 128px, 192px"
+              sizes="(max-width: 640px) 128px, 160px"
               className="object-contain"
             />
 
             <div className="absolute inset-[10%_12%_15%_14%] flex flex-col justify-start items-center text-center p-1 sm:p-2 z-10 font-mono">
-              <h3 className="font-bold tracking-widest text-[#F3E5AB] text-[10px] sm:text-xs uppercase border-b border-[#F3E5AB]/40 pb-1 mb-2 sm:mb-3 w-full">
+              <h3 className="font-bold tracking-widest text-[#F3E5AB] text-[10px] sm:text-xs uppercase border-b border-[#F3E5AB]/40 pb-0.5 sm:pb-1 mb-1.5 sm:mb-2.5 w-full">
                 REACH US ON
               </h3>
 
-              <div className="flex flex-col gap-1.5 sm:gap-2 w-full font-bold text-left pl-1 sm:pl-1.5 -rotate-1 sm:-rotate-2 origin-top-left">
+              <div className="flex flex-col gap-1.5 sm:gap-2.5 w-full font-bold text-left pl-0.5 sm:pl-1 -rotate-1 sm:-rotate-2 origin-top-left">
                 <a
                   href="https://github.com/COSC-Organization"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-[#F3E5AB] hover:text-amber-300 transition-colors text-[8.5px] sm:text-[10.5px]"
+                  className="flex items-center gap-1.5 sm:gap-2 text-[#F3E5AB] hover:text-amber-300 transition-colors text-[9px] sm:text-[10.5px]"
                 >
                   <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-white text-black flex items-center justify-center shrink-0 p-0.5">
                     <GithubIcon />
@@ -314,7 +497,7 @@ export default function GetInTouchPage() {
                   href="https://www.linkedin.com/company/canara-students-open-source-community/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-[#F3E5AB] hover:text-amber-300 transition-colors text-[8.5px] sm:text-[10.5px]"
+                  className="flex items-center gap-1.5 sm:gap-2 text-[#F3E5AB] hover:text-amber-300 transition-colors text-[9px] sm:text-[10.5px]"
                 >
                   <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded bg-[#0A66C2] text-white flex items-center justify-center shrink-0 p-0.5">
                     <LinkedinIcon />
@@ -326,7 +509,7 @@ export default function GetInTouchPage() {
                   href="https://www.instagram.com/cosc_cec?igsi=NWhzZjFlM2lsamJ0"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-[#F3E5AB] hover:text-amber-300 transition-colors text-[8.5px] sm:text-[10.5px]"
+                  className="flex items-center gap-1.5 sm:gap-2 text-[#F3E5AB] hover:text-amber-300 transition-colors text-[9px] sm:text-[10.5px]"
                 >
                   <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white flex items-center justify-center shrink-0 p-0.5">
                     <InstagramIcon />
@@ -338,33 +521,33 @@ export default function GetInTouchPage() {
           </div>
 
           {/* BOTTOM RIGHT: PLANT + BOARD 3 */}
-          <div className="flex items-end gap-1.5 sm:gap-3 pointer-events-auto ">
+          <div className="flex items-end gap-0.5 sm:gap-2 md:gap-3 pointer-events-auto translate-x-2 sm:translate-x-4 md:-translate-x-8">
             {/* Plant */}
-            <div className="relative w-16 sm:w-28 lg:w-45 aspect-square shrink-0 drop-shadow-md translate-x-2 sm:translate-x-10 -translate-y-10 sm:-translate-y-15">
+            <div className="relative w-26 sm:w-34 lg:w-40 aspect-square shrink-0 drop-shadow-md translate-x-10 sm:translate-x-14 md:translate-x-8 -translate-y-4 sm:-translate-y-6 md:-translate-y-10">
               <Image
                 src="/contact/plant.png"
                 alt="Potted Plant"
                 fill
                 priority
                 quality={100}
-                sizes="(max-width: 640px) 64px, 112px"
+                sizes="(max-width: 640px) 104px, 160px"
                 className="object-contain object-bottom"
               />
             </div>
 
             {/* Board 3 */}
-            <div className="relative w-24 sm:w-30 lg:w-34 aspect-[600/900] drop-shadow-[0_10px_25px_rgba(0,0,0,0.6)] pointer-events-auto -translate-y-6 sm:-translate-y-12">
+            <div className="relative w-26 sm:w-36 lg:w-34 aspect-[600/900] drop-shadow-[0_10px_25px_rgba(0,0,0,0.6)] pointer-events-auto translate-x-4 sm:translate-x-6 md:translate-x-0 md:-translate-y-4">
               <Image
                 src="/contact/board3.png"
                 alt="Let's Build Something Amazing Board"
                 fill
                 priority
                 quality={100}
-                sizes="(max-width: 640px) 128px, 192px"
+                sizes="(max-width: 640px) 128px, 160px"
                 className="object-contain"
               />
 
-              <div className="absolute inset-[10%_12%_15%_12%] flex flex-col justify-center items-center text-center p-1.5 z-10 font-mono text-[9.5px] sm:text-[11.5px] font-bold tracking-widest gap-1.5 sm:gap-2 text-[#F3E5AB] rotate-2 sm:rotate-4 origin-center -translate-x-3.9 sm:-translate-x-1.8 -translate-y-1.5 sm:-translate-y-2.5">
+              <div className="absolute inset-[10%_12%_15%_12%] flex flex-col justify-center items-center text-center p-0.5 sm:p-1.5 z-10 font-mono text-[9.5px] sm:text-xs font-bold tracking-widest gap-0.5 sm:gap-1 text-[#F3E5AB] rotate-2 sm:rotate-4 origin-center -translate-x-1.5 sm:-translate-x-2 -translate-y-1 sm:-translate-y-2">
                 <p>LET'S</p>
                 <p>BUILD</p>
                 <p>SOMETHING</p>
