@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import VideoWithPoster from './VideoWithPoster';
 
 const navItems = [
-  { id: '01', label: 'About Us', href: '/#about' },
+  { id: '01', label: 'About Us', href: '/about' },
   { id: '02', label: 'Blogs', href: '/blogs' },
   { id: '03', label: 'Events', href: '/events' },
   { id: '04', label: 'Projects', href: '/projects' },
@@ -22,10 +22,8 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
   const sectionRef = React.useRef<HTMLDivElement>(null);
   const [showScrollPrompt, setShowScrollPrompt] = React.useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-
   React.useEffect(() => {
     const updateScaleAndCenter = () => {
-
       if (sectionRef.current) {
         const scrollWidth = sectionRef.current.scrollWidth;
         const clientWidth = sectionRef.current.clientWidth;
@@ -46,6 +44,9 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
 
   React.useEffect(() => {
     if (!isAnimationComplete) return;
+
+    // Prefetch the blogs route so navigation is instant
+    router.prefetch('/blogs');
 
     // Hide prompt immediately if user scrolls horizontally
     const handleScroll = () => {
@@ -72,7 +73,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
         container.removeEventListener('scroll', handleScroll);
       }
     };
-  }, [isAnimationComplete]);
+  }, [isAnimationComplete, router]);
 
   // Convert vertical scroll gestures to horizontal scroll in responsive view (< 1440px)
   React.useEffect(() => {
@@ -210,21 +211,20 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
 
       {/* Desktop Top Right Navigation (hidden on mobile) */}
       <div className="md:fixed top-2 right-4 lg:top-3 lg:right-6 xl:top-4 xl:right-8 2xl:top-6 2xl:right-12 z-20 hidden md:grid grid-cols-2 gap-x-8 gap-y-2 lg:gap-x-12 lg:gap-y-2.5 xl:gap-x-16 xl:gap-y-3">
-
-{navItems.map((item) => (
-  <div
-    key={item.id}
-    className="flex items-baseline gap-2.5 lg:gap-3.5 xl:gap-4 group cursor-pointer"
-    onClick={() => handleNavClick(item.href, item.label)}
-  >
-    <span className="text-zinc-600 font-mono text-xs lg:text-sm xl:text-base tracking-tighter group-hover:text-white transition-colors">
-      {item.id}
-    </span>
-    <span className="text-zinc-300 text-[11px] lg:text-xs xl:text-sm font-geometric font-medium tracking-[0.15em] lg:tracking-[0.18em] xl:tracking-[0.2em] uppercase group-hover:text-white transition-colors">
-      {item.label}
-    </span>
-  </div>
-))}
+        {navItems.map((item) => (
+          <div
+            key={item.id}
+            className="flex items-baseline gap-2.5 lg:gap-3.5 xl:gap-4 group cursor-pointer"
+            onClick={() => handleNavClick(item.href, item.label)}
+          >
+            <span className="text-zinc-600 font-mono text-xs lg:text-sm xl:text-base tracking-tighter group-hover:text-white transition-colors">
+              {item.id}
+            </span>
+            <span className="text-zinc-300 text-[11px] lg:text-xs xl:text-sm font-geometric font-medium tracking-[0.15em] lg:tracking-[0.18em] xl:tracking-[0.2em] uppercase group-hover:text-white transition-colors">
+              {item.label}
+            </span>
+          </div>
+        ))}
       </div>
 
       {/* Mobile Header (hidden on desktop) */}
@@ -302,7 +302,7 @@ export default function HeroSection({ isAnimationComplete = true }: HeroSectionP
 
         {/* Menu Navigation Links */}
         <div className="flex flex-col gap-3.5 sm:gap-5 my-auto">
- {navItems.map((item) => (
+          {navItems.map((item) => (
             <div
               key={item.id}
               className="flex items-baseline gap-3.5 sm:gap-4 group cursor-pointer border-b border-zinc-900 pb-2"

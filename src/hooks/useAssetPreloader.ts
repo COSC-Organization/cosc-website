@@ -20,8 +20,38 @@ const CRITICAL_IMAGES = [
 ];
 
 /**
+ * All blog page image assets preloaded silently in background when user is on landing page.
+ */
+const BLOG_IMAGES = [
+  '/blogs/table.png',
+  '/blogs/board.png',
+  '/blogs/board2.png',
+  '/blogs/sticky.png',
+  '/blogs/plant.png',
+  '/blogs/mug.png',
+  '/blogs/bookstack.png',
+  '/blogs/plant2.png',
+  '/blogs/button.png',
+  '/blogs/books.png',
+  '/blogs/1.png',
+  '/cosc logo.png',
+  '/blogs/buildathon.png',
+  '/blogs/ceatherion.jpeg',
+  '/blogs/bug-bounty.png',
+  '/blogs/DSA-series.png',
+];
+
+function preloadBlogAssets() {
+  BLOG_IMAGES.forEach((src) => {
+    const img = new Image();
+    img.src = src;
+  });
+}
+
+/**
  * Preloads all critical images into the browser cache during the loading screen.
  * Returns `imagesReady` when all images are loaded (or failed — we don't block on errors).
+ * Also triggers background preloading for blog assets once landing page is ready.
  */
 export function useAssetPreloader() {
   const [imagesReady, setImagesReady] = useState(false);
@@ -46,8 +76,20 @@ export function useAssetPreloader() {
 
     Promise.all(promises).then(() => {
       setImagesReady(true);
+
+      // Preload blog assets in background while user is on landing page
+      if (typeof window !== 'undefined') {
+        if ('requestIdleCallback' in window) {
+          (window as Window & { requestIdleCallback: (cb: () => void) => void }).requestIdleCallback(() => {
+            preloadBlogAssets();
+          });
+        } else {
+          setTimeout(preloadBlogAssets, 300);
+        }
+      }
     });
   }, []);
 
   return { imagesReady };
 }
+

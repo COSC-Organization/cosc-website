@@ -30,6 +30,10 @@ const defaultFramePhotoBox = [
 ];
 const pattern = [0, 2, 1, 1, 0, 2, 0, 1, 0, 2, 0, 1, 2];
 
+function getFrameIndex(index: number) {
+  return pattern[index % pattern.length];
+}
+
 // ✅ Snow particle component
 function SnowParticles() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -102,7 +106,7 @@ function SnowParticles() {
 }
 
 function renderMember(member: TeamMember, index: number, isLCP: boolean = false) {
-  let frameIdx = pattern[index % pattern.length];
+  const frameIdx = getFrameIndex(index);
 
   let box;
   if (member.customPhotoBox) {

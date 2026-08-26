@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 interface VideoWithPosterProps {
   /** Path to the video file, e.g. "/1.mp4" */
@@ -9,76 +9,61 @@ interface VideoWithPosterProps {
   posterSrc: string;
   /** Additional className for the wrapper container */
   className?: string;
+  /** Controls if the video should start loading/playing (defaults to true) */
+  isAnimationComplete?: boolean;
 }
 
-/**
- * Renders a poster image that is immediately visible (already cached by useAssetPreloader),
- * with a <video> layered on top at opacity 0. Once the video has buffered enough to play
- * smoothly (canplaythrough), it fades in over 300ms and the poster is removed from the DOM.
- */
 export default function VideoWithPoster({
   src,
   posterSrc,
   className = '',
+  isAnimationComplete = true,
 }: VideoWithPosterProps) {
   const [videoReady, setVideoReady] = useState(false);
   const [posterRemoved, setPosterRemoved] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const hasTriggered = useRef(false);
 
-  const handleCanPlayThrough = useCallback(() => {
-    if (hasTriggered.current) return;
-    hasTriggered.current = true;
-
-    // Start playing the video
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-        // Autoplay might be blocked; still show the video
-      });
+  useEffect(() => {
+    if (isAnimationComplete && videoRef.current) {
+      videoRef.current.play().catch(() => { });
     }
+  }, [isAnimationComplete, videoReady]);
 
-    // Trigger the crossfade
+  const handleCanPlay = () => {
     setVideoReady(true);
-
-    // Remove poster from DOM after the transition completes (400ms buffer)
-    setTimeout(() => {
-      setPosterRemoved(true);
-    }, 400);
-  }, []);
+    setTimeout(() => setPosterRemoved(true), 400);
+  };
 
   return (
-    <div className={`relative w-full h-full ${className}`}>
-      {/* Poster image — shown instantly from cache */}
+    <div className={`relative w-full h-full transform-gpu ${className}`}>
       {!posterRemoved && (
         <img
           src={posterSrc}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-contain pointer-events-none"
-          style={{
-            opacity: videoReady ? 0 : 1,
-            transition: 'opacity 300ms ease-out',
-          }}
+          loading="eager"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-contain pointer-events-none transition-opacity duration-300 ease-out"
+          style={{ opacity: videoReady ? 0 : 1 }}
         />
       )}
-
-      {/* Video — layered on top, fades in once buffered */}
-      <video
-        ref={videoRef}
-        src={src}
-        muted
-        loop
-        playsInline
-        preload="auto"
-        disablePictureInPicture
-        controlsList="nopictureinpicture"
-        onCanPlayThrough={handleCanPlayThrough}
-        className="absolute inset-0 w-full h-full object-contain pointer-events-none"
-        style={{
-          opacity: videoReady ? 1 : 0,
-          transition: 'opacity 300ms ease-out',
-        }}
-      />
+      {isAnimationComplete && (
+        <video
+          ref={videoRef}
+          src={src}
+          muted
+          loop
+          playsInline
+          aria-hidden="true"
+          tabIndex={-1}
+          preload="metadata"
+          disablePictureInPicture
+          controlsList="nopictureinpicture"
+          onCanPlayThrough={handleCanPlay}
+          className="absolute inset-0 w-full h-full object-contain pointer-events-none transition-opacity duration-300 ease-out"
+          style={{ opacity: videoReady ? 1 : 0 }}
+        />
+      )}
     </div>
   );
 }
