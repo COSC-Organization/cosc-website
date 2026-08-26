@@ -19,7 +19,7 @@ export const navItems: NavItem[] = [
     { id: "04", label: "Projects", href: "/projects" },
     { id: "05", label: "Workshops", href: "/workshops" },
     { id: "06", label: "Team", href: "/team" },
-    { id: "07", label: "Get In Touch", href: "/#contact" },
+    { id: "07", label: "Get In Touch", href: "/get-in-touch" },
 ];
 
 export default function Header() {
@@ -40,7 +40,7 @@ export default function Header() {
     }, [isMobileMenuOpen]);
 
     // Hide Header on HeroSection (Home page '/')
-    if (pathname === "/" ) {
+    if (pathname === "/") {
         return null;
     }
 
@@ -56,6 +56,10 @@ export default function Header() {
         }
         if (label === "Team" || href === "/team") {
             router.push("/team");
+            return;
+        }
+        if (label === "Get In Touch" || href === "/get-in-touch") {
+            router.push("/get-in-touch");
             return;
         }
         if (href.startsWith("/#")) {
